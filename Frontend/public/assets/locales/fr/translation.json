@@ -1,0 +1,359 @@
+{
+  "Initial":
+    {
+      "appTitle": "La French Tech Beyrout",
+      "language": "Langue",
+      "welcome_message": "Bienvenue",
+      "days_since_release": "ça fait {{number_of_days}} jours depuis la sortie de cette vidéo"
+    }
+,
+  "Hero":
+    {
+      "mainHeading":"BIENVENUE À",
+      "text":"Ce mouvement de startups françaises monte en puissance…\nIl n'attend plus que vous.",
+      "getStartedBtn":"Commencer",
+      "contactBtn":"Nous Contacter",
+      "chatBtn":"Discute avec nous"
+    }
+,
+  "Menu":
+    [
+      {
+        "to": "/about",
+        "text": "Qui sommes-nous",
+        "id": "about"
+      },
+      {
+          "to": "/startups",
+          "text": "StartUps"
+      },
+      {
+          "to": "/events",
+          "text": "Événements"
+      },
+      {
+          "to": "/members",
+          "text": "Membres"
+      },
+      {
+          "to": "/contact",
+          "text": "Contactez-nous"
+      }
+    ] 
+,
+  "WhoWeAre":
+    {
+      "title":"Qui nous sommes",
+      "text":["«La French Tech» est notre scène startup ici en France. C'est aussi un mouvement unique rassemblant des startups, des investisseurs, des décideurs politiques et des bâtisseurs communautaires."
+        ,"Les équipes locales de La French Tech sont dirigées par leurs communautés de startups respectives. Ils partagent notre mission nationale et jouent un rôle essentiel pour que cela se produise à l'échelle mondiale."
+        ,"La French Tech se mobilise pour l'intégration des jeunes talents dans l'écosystème tech et lance un jobboard dédié à l'emploi dans les startups."]
+    }   
+,
+  "WhatWeDo":
+  {
+    "title":"Ce que nous faisons",
+    "data":[
+      {
+        "topic":"Concevoir",
+        "title":"Next 120 de la French Tech",
+        "subText":"Le programme de croissance en France a été conçu pour fournir un soutien sans précédent aux 120 entreprises à la croissance la plus rapide en France."
+      },
+      {
+        "topic":"Support",
+        "title":"Bienvenue en France !",
+        "subText":"Talents du monde, la France vous accueille ! Le gouvernement français a fait de l'attractivité une priorité en lançant un dispositif ambitieux. Nous sommes fiers de partager avec vous notre nouveau plan d'attractivité dédié à l'accueil des talents tech internationaux."
+      },
+      {
+        "topic":"Développer",
+        "title":"Prestataires de services - French Tech Friendly",
+        "subText":"Si vous êtes un entrepreneur technologique, quelle que soit votre étape, il y a de fortes chances que la Mission French Tech et ses partenaires aient élaboré un programme, une politique ou un programme de financement pour vous."
+      }
+    ],
+    "bottomLink":"Découvrez comment La French Tech aide les startups"
+  } 
+,
+  "WorldIsGlobal":
+  {
+    "mainHeading":"Le monde est global",
+    "secondHeading":"et nous aussi"
+  } 
+,
+  "Events":
+  {
+    "mainHeading_home":"Découvrez",
+    "secondHeading_home":"les derniers événements",
+    "from":"De",
+    "to":"Jusqu'à",
+    "viewMore":"Voir plus",
+    "subscribeNow":"S'abonner maintenant",
+    "subscribe":"S'abonner",
+    "underDescriptionCard1":"Appuyez sur Voir plus pour voir la description complète",
+    "underDescriptionCard2":"Appuyez sur S'abonner maintenant pour voir la description complète",
+    "underDescriptionModal":"Après vous être abonné, vous recevrez un e-mail de rappel",
+    "emailPlaceHolder":"Écrivez votre email",
+    "successSubscribe":"Inscription à l'événement effectuée avec succès",
+    "mainHeading_events_1":"Du Début À La Fin",
+    "secondHeading_events_1":"découvrez et abonnez-vous aux événements à venir",
+    "mainHeading_events_2":"La perfection n'est pas accessible",
+    "secondHeading_events_2":"mais « La French Tech » chasse la perfection et elle peut attraper l'excellence.",
+    "bottomLink":"Explorez les événements à venir"
+  }
+,
+  "Star":
+  {
+    "About":{
+      "title":"À propos de nous",
+      "subTitle":"Nous sommes une équipe de leaders experts"
+    },
+    "Events":{
+      "title":"Événements",
+      "subTitle":"Trouvez vos points clés"
+    },
+    "Contact":{
+      "title":"Nous contacter",
+      "subTitle":"Nous serions ravis de savoir quelle est votre startup"
+    },
+    "StartUps":{
+      "title":"AIDER LES START-UP",
+      "subTitle":"Construisez-vous une belle histoire avec nous."
+    },
+    "Members":{
+      "title":"Membres",
+      "subTitle":"Rencontrez notre équipe de direction."
+    }
+  }
+, 
+  "About":
+  {
+    "Contents":
+      [
+        {
+          "topLine":"Qui nous sommes",
+          "headline":"La French Tech ?",
+          "description":"«La French Tech» est notre scène startup ici en France. C'est aussi un mouvement unique rassemblant des startups, des investisseurs, des décideurs politiques et des bâtisseurs communautaires. Notre mission ? Faire de la France l'un des meilleurs endroits au monde pour lancer et développer des entreprises mondiales qui ont du sens pour notre avenir.",
+          "linkLabel": "Regardez notre vidéo"
+        },
+        {
+          "topLine":"La French Tech c'est",
+          "headline":"propulsé par d'innombrables personnes dans le monde entier.",
+          "description":"Et tandis que n'importe qui dans la scène technologique de notre pays peut s'appeler French Tech, rencontrez les gens formidables qui aident à faire fonctionner les trains.",
+          "buttonLabel": "Trouve plus"
+        },
+        {
+          "topLine":"Conçu et Développé",
+          "headline":"National",
+          "description":"L'équipe nationale de La French Tech, connue sous le nom de Mission French Tech, siège administrativement au sein du gouvernement français et physiquement sur le plus grand campus de startups au monde, Station F. Nous sommes une nouvelle génération de fonctionnaires, maniant un mélange de politique, de financement, de marketing et la conception du programme.",
+          "buttonLabel": "Découvrir plus"
+        },
+        {
+          "topLine":"Découvrir plus",
+          "headline":"Local",
+          "description":"Les équipes locales de La French Tech sont dirigées par leurs communautés de startups respectives. Ils partagent notre mission nationale et jouent un rôle essentiel pour que cela se produise à l'échelle mondiale, en commençant par leurs propres villes locales.",
+          "buttonLabel": "Voir les projets"
+        },
+        {
+          "topLine":"Notre objectif",
+          "headline":"Capital et Communautés",
+          "description":"Nous avons constitué un vaste réseau de 13 capitales French Tech, 45 communautés French Tech en France et 63 communautés French Tech basées dans 100 villes à travers le monde. Ils animent chaque jour leur écosystème local, ils s'engagent à le développer et à soutenir les ambitions de la French Tech.",
+          "buttonLabel": "Voir plus"
+        }
+    ] ,
+    "ourLocation":{
+      "title":"Notre emplacement",
+      "text":"Ancrées dans près de 100 villes à travers le monde, les Communautés French Tech sont des nœuds de notre réseau mondial. Ensemble, ils donnent la priorité, alimentent le mouvement localement et augmentent la mobilité des startups françaises en les accueillant dans leur ville. "
+    },
+    "theySupportUs":"Ils nous soutiennent"
+  },
+  "Contact":
+    {
+      "titleBesideForm":"Si votre plan A n'a pas fonctionné LA FRENCH TECH en a 25 de plus pour vous.",
+      "mainHeading_underForm":"Laissez votre avance inquiétante",
+      "secondHeading_underForm":"devenir une réflexion et une planification avancées avec nous.",
+      "labelsForm":[
+        {
+          "labelName":"Prénom*",
+          "placeHolder":"Entrez votre prénom"
+        },
+        {
+          "labelName":"Nom de famille*",
+          "placeHolder":"Entrez votre nom de famille"
+        },
+        {
+          "labelName":"Compagnie",
+          "placeHolder":"Entrez le nom de votre entreprise"
+        },
+        {
+          "labelName":"E-mail*",
+          "placeHolder":"Entrer votre Email"
+        },
+        {
+          "labelName":"Sujet*",
+          "placeHolder":"Choisissez le sujet"
+        },
+        {
+          "labelName":"Votre message*",
+          "placeHolder":"Entrez votre message"
+        }
+      ],
+      "subjsctFormFirst":"Choisissez un sujet",
+      "subjectForm":[
+        "Je souhaite démarrer ou rejoindre une communauté French Tech",
+        "Je suis intéressé à postuler pour un emploi",
+        "J'aimerais en savoir plus sur l'un de vos programmes",
+        "J'aimerais en savoir plus sur les opportunités de financement de démarrage",
+        "J'ai une demande d'entretien ou de prise de parole en public",
+        "J'ai une demande de partenariat",
+        "Autre"
+      ],
+      "btnFormLabel":"Envoyer",
+      "formMessages":{
+        "error_1":"Prénom obligatoir",
+        "error_2":"Le prénom doit avoir une longueur minimale de 3",
+        "error_3":"Le prénom doit avoir une longueur maximale de 30",
+        "error_4":"Le prénom doit être un type de 'texte'",
+        "error_5":"Nom de famille obligatoir",
+        "error_6":"Le nom de famille doit avoir une longueur minimale de 3",
+        "error_7":"Le nom de famille doit avoir une longueur maximale de 30",
+        "error_8":"Le nom de famille doit être un type de 'texte'",
+        "error_9":"E-mail obligatoir",
+        "error_10":"L'adresse e-mail n'est pas valide",
+        "error_11":"Le sujet est obligatoir",
+        "error_12":"Le message est obligatoir",
+        "error_13":"Le message doit avoir une longueur minimale de 20",
+        "error_14":"Le message doit être du type 'texte'",
+        "success":"Application a été envoyée !"
+      },
+      "mainHeading_FAQ":"QFP",
+      "secondHeading_FAQ":"Questions Fréquemment Posées",
+      "searchFAQPlaceHolder":"Écrivez votre question ici",
+      "FAQ": [
+        {
+            "title": "Pour tout le monde",
+            "questions": [
+                {
+                    "questionName": "Quelle est la différence entre les Capitales French Tech et les Communautés French Tech ?",
+                    "answear": "La Communauté French Tech est composée de diverses communautés French Tech locales dans près de 100 villes en France et dans le monde. Les équipes appartiennent à leur communauté French Tech locale. Elles partagent toutes notre mission et nos objectifs, les fixant localement afin qu'elles deviennent une réalité mondiale.\nCommunautés : Implantées dans près de 100 villes dans le monde, les communautés French Tech sont les centres névralgiques du réseau. Chaque jour, elles animent leurs écosystèmes locaux, s'engagent et dynamisent la mobilité des start-up françaises en les accueillant Elles rassemblent start-ups, investisseurs, salariés et autres parties prenantes par zone géographique.\nCapitales: les Capitales de la French Tech sont situées dans les 13 régions françaises qui concentrent le plus de start-ups en croissance. Des communautés Tech en y mettant en œuvre les programmes nationaux et en fédérant des communautés à forte densité de start-up en hyper-croissance animées par une équipe dédiée.",
+                    "toggleQuestion":false
+                },
+                {
+                    "questionName": "Comment devient-on une communauté French Tech officielle?",
+                    "answear": "La Mission French Tech certifie des collectifs indépendants dénommés Communautés French Tech et Capitales French Tech. Si vous partagez la vision de la French Tech sur l'action publique et souhaitez jouer un rôle clé dans l'atteinte de ses objectifs à l'échelle mondiale, en commençant par le local communautés, vous pouvez postuler au label officiel Communauté French Tech. Treize Capitales French Tech, 38 Communautés French Tech en France et 48 Communautés French Tech à l'étranger ont été labellisées en 2019.\nLes candidatures sont désormais ouvertes pour notre prochaine vague de certification pour 2020.",
+                    "toggleQuestion":false
+                }
+            ],
+            "toggleTitle":false
+        },
+        {
+            "title": "Pour les startups",
+            "questions": [
+                {
+                    "questionName": "Je suis une startup. Comment la French Tech peut-elle m'aider ?",
+                    "answear": "Pour le soutien de l'État, la Mission French Tech s'engage à aider indirectement toutes les startups par divers moyens. Pour n'en citer que quelques-uns: Politique publique pro-startup (ex. Visa French Tech), financement quand il y a des lacunes du marché (ex. French Tech Seed Fund), des centres d'aide (ex. French Tech Central) ainsi que des actions de promotion à l'étranger qui profitent à la notoriété de la scène French Tech dans son ensemble (ex. Scale-Up Tour).\nIl y en a quelques-uns cas où la Mission French Tech travaille directement avec des startups, notamment via nos programmes (ex. French Tech 120).Consultez la rubrique 'Comment la France aide les startups' pour voir s'il y en a une qui vous convient. de nouveaux programmes chaque année et sont toujours à la recherche de nouvelles idées. Si vous avez quelque chose en tête, contactez-nous et envoyez-nous votre suggestion.\nPour un soutien au niveau de la communauté, nos 90 communautés French Tech dans le monde servent de nœuds dans un réseau de des bénévoles heureux de vous faire découvrir leur terrain. près de chez vous.",
+                    "toggleQuestion":false
+                },
+                {
+                    "questionName": "Puis-je devenir membre de la French Tech?",
+                    "answear": "La French Tech est le surnom de tout l'écosystème des startups françaises. Si vous avez fondé, travaillez ou investissez dans une startup française ou présente en France, vous pouvez très certainement vous considérer comme faisant partie de la French Tech. Il y a pas de modèle d'adhésion au niveau national ou international.\nIl existe d'autres moyens de s'impliquer:\nRejoignez la communauté French Tech la plus proche de chez vous\nPostulez à l'un de nos programmes Startup\nInscrivez-vous à notre newsletter ou suivez-nous sur Twitter.",
+                    "toggleQuestion":false
+                }
+            ],
+            "toggleTitle":false
+        },
+        {
+            "title": "Pour les leaders communautaires",
+            "questions": [
+                {
+                    "questionName": "Je souhaite inviter un des cadres de la Mission French Tech à intervenir lors de mon événement et/ou pour un entretien. Quel est le meilleur moyen de vous contacter ?",
+                    "answear": "Merci pour votre intérêt! Écrivez-nous via ce formulaire, au moins 6 semaines avant votre événement. Pour les journalistes",
+                    "toggleQuestion":false
+                },
+                {
+                    "questionName": "Je souhaite que la French Tech sponsorise mon événement. Quelle est votre politique ?",
+                    "answear": "La Mission French Tech sponsorise trois types d'événements.\n Ceux organisés par nos membres de la Communauté French Tech, via les French Tech Community Grants\nDes événements internationaux en ligne avec nos propres objectifs marketing à l'étranger, actuellement via nos partenaires Business France.\nDes événements internationaux en adéquation avec nos propres ambitions marketing, via les French Tech Event Grants. Nous faisons un appel à projets chaque année, inscrivez-vous à notre newsletter pour rester informé.",
+                    "toggleQuestion":false
+                } 
+            ],
+            "toggleTitle":false
+        }
+    ]     
+  },
+  "StartUps":{
+    "StartUps_mainHeading":"Ce que la French Tech fait pour les start-up",
+    "StartUps_secondHeading":"Êtes-vous un entrepreneur à être? Une start-up en pleine croissance ? Un scale-up en hausse ? Un talent international ou un investisseur ?\nRetrouvez ici les principaux dispositifs publics, des programmes aux politiques publiques, proposés par les acteurs de l'Etat pour faire émerger et promouvoir l'écosystème French Tech.",
+    "StartUps_note":"Vous avez l'impression d'avoir oublié quelque chose ?",
+    "StartUps_contactLink":"Faites le nous savoir!",
+    "linkLearnMore":"Voir plus",
+    "StartUpsCompanies":[
+      {
+        "name":"French Tech Agri20",
+        "description":"Agri20 a pour objectif de faire émerger des champions technologiques proposant des innovations répondant aux défis alimentaires et agricoles."
+      },
+      {
+        "name":"French Tech Next40/120",
+        "description":"Ce programme dédié aux startups en phase d'hyper-croissance offre un accompagnement sans précédent à 120 entreprises en fort développement."
+      },
+      {
+        "name":"French Tech Rise",
+        "description":"Une initiative pour soutenir le financement des écosystèmes territoriaux."
+      },
+      {
+        "name":"Welcome to France",
+        "description":"Talents du monde entier, la France vous ouvre les bras !"
+      },
+      {
+        "name":"La France investit dans les start-up",
+        "description":"Vous êtes entrepreneur et vous souhaitez développer votre entreprise en France ? Jetez un œil aux multiples outils d'investissement et de financement à votre disposition qui sont là pour vous aider dans cette aventure !"
+      },
+      {
+        "name":"La French Tech x Jobteaser",
+        "description":"La French Tech se mobilise pour l'intégration des jeunes talents dans l'écosystème tech et lance un jobboard dédié à l'emploi dans les startups, en partenariat avec Jobteaser (French Tech Next40)"
+      },
+      {
+        "name":"French Tech Visa",
+        "description":"Le visa French Tech, c'est est une procédure simplifiée et accélérée pour les investisseurs, fondateurs et collaborateurs de startups non-européens qui veulent s'installer en France."
+      },
+      {
+        "name":"French Tech Seed",
+        "description":"Nous co-investissons pour donner un coup de pouce aux startups innovantes en phase d'amorçage."
+      },
+      {
+        "name":"Correspondants French Tech",
+        "description":"Un réseau de correspondants au sein des administrations publiques pour faciliter les relations entre entrepreneurs et administrations."
+      },
+      {
+        "name":"French Tech Chatbot",
+        "description":"Ne vous égarez plus dans vos démarches administratives, demandez à Noa !"
+      },
+      {
+        "name":"French Tech Community Fund",
+        "description":"Ce nouvel outil de co-financement est conçu pour donner des ailes aux initiatives des communautés French Tech."
+      },
+      {
+        "name":"Bourse French Tech",
+        "description":"La Bourse French Tech est une aide clé pour financer les premières dépenses d'un projet de création d'entreprise innovante."
+      }
+    ]
+  },
+  "Members":{
+    "Members_mainHeading":"ÊTRE DANS NOS HISTOIRES CLIENTS",
+    "Members_secondHeading":"De meilleurs services commencent ici"
+  },
+  "Footer": [
+    {
+        "title": "Principal",
+        "links": ["Blog", "FAQ", "Assistance", "À propos de nous"]
+    },
+    {
+        "title": "Produit",
+        "links": ["Connexion", "Personnel", "Professionnel", "Équipe"]
+    },
+    {
+        "title": "Presse",
+        "links": ["Logos", "Événements", "Histoires", "Bureau"]
+    },
+    {
+        "title": "Légal",
+        "links": ["RGPD", "Politique de confidentialité", "Conditions d'utilisation", "Avis de non-responsabilité"]
+    }
+  ]     
+}
