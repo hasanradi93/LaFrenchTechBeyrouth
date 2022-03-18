@@ -74,10 +74,10 @@ export const CMBFilter = styled.select`
     }
 `
 export const InputBox = styled.input`
-    width:250px;
-    height:25px;
-    background:${lightGray};
-    color:${white};
+	width:${({ width }) => (width ? width : '250px')};
+    height:${({ height }) => (height ? height : '25px')};
+    background:${({ background }) => (background ? background : lightGray)};
+    color:${({ color }) => (color ? color : white)};
 	outline:none;
 	box-shadow:none;
 	border-top-style: hidden;
@@ -86,7 +86,7 @@ export const InputBox = styled.input`
 	border-bottom-style: groove;
 	border-bottom-color:${white};
 	&::placeholder{
-		color:${white};
+		background:${({ placeholderColor }) => (placeholderColor ? placeholderColor : white)};
 	}
 	&:hover{
         color:${darkRed};
@@ -102,24 +102,51 @@ export const DivTwoSide = styled.div`
     flex-wrap: wrap;
 	width:100%;
 	height:25px;
+	margin-top:${(marginTop) => (marginTop ? marginTop : 'auto')}
     align-content: space-between;
     justify-content: space-between;
+`
+export const LocationCardXY = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	width:100%;
+	height:60px;
+	align-content: space-between;
+	justify-content: space-between;
 `
 export const SpanSide = styled.span`
     width:150px;
     height:25px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	color:${({ color }) => (color ? color : lightGreen)}
+`
+export const MiniClick = styled.a`
+    width:150px;
+    height:25px;
+	text-align:center;
+	cursor:pointer;
+	tet-decoration:none;
+	color:${({ color }) => (color ? color : lightGreen)};
+	&:hover{
+		color:${lightRed};
+		cursor:pointer;
+	}
 `
 export const SpanSide2 = styled.span`
-    width:50%;
+    width:${({ width }) => (width ? width : '50%')};
 	float:left;
+	margin-left:auto;
+	margin-right:auto;
     height:36px;
 	cursor:pointer;
 	text-align:center;
 	&:hover{
-        color:${darkRed};
-		background-color:${darkGray};
+        color:${({ colorHover }) => (colorHover ? colorHover : darkRed)};
+		background-color:${({ backColor }) => (backColor ? backColor : darkGray)};
 		>a{
-			color:${darkRed};
+			color:${({ colorHover }) => (colorHover ? colorHover : darkRed)};
 		}
     }
 `
@@ -259,9 +286,10 @@ export const EventModalData = styled.div`
 	color: ${darkGray};
 	margin: auto;
 `
-export const EventCardlocation = styled.div`
+export const EventCardLocation = styled.div`
 	width:90%;
-	height:330px;
+	height:${({ height }) => (height ? height : '330px')};
+	margin-bottom:${({ marginBottom }) => (marginBottom ? marginBottom : '200px')};
 	margin-left:auto;
 	margin-right:auto;
 `
@@ -271,35 +299,75 @@ export const EventCardSubscribe = styled.div`
 	justify-content: center;
 	align-items: center;
 	width:60%;
+	height:150px;
+	overflow-y:scroll;
 	margin-left:auto;
 	margin-right:auto;
 	margin-bottom:10px;
-	>input{
-		margin-top: auto;
-		border:1px solid ${lightGray};
-		color:${darkGray};
-		height:30px;
-		width:250px;
-		padding-left:3px;
+	@media screen and (max-width:960px){
+		width:100%;
 	}
-	>input:hover{
-		border:1px solid ${lightRed};
-	}
-	>input:focus{
-		border:1px solid ${darkRed};
-	}
-	>button{
-		margin-top: auto;
-		border:1px solid ${lightGray};
-		color:${darkGray};
-		transition: all 0.6s ease;
-		height:30px;
-		width:150px;
-	}
-	>button:hover{
-		border:1px solid ${lightRed};
+`
+export const SeePhotosViewSection = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    width:100%;
+    height:auto;
+	margin-bottom:15px;
+    background:${lightGray};
+`
+export const ThePhotoCadre = styled.div`
+	width:120px;
+	height:140px;
+	padding:10px;
+	margin-left:5px;
+	margin-right:5px;
+`
+export const DeleteBtnPhoto = styled.a`
+	color:  ${white};
+	font-size: 14px;
+	cursor:pointer;
+	width:16px;
+	height:16px;
+	text-align:center;
+	paddin-bottm:2px;
+	margin-top:-5px;
+	&:hover{
 		color:${darkRed};
-		font-size:14px;
-		font-weight:600;
 	}
+`
+export const ThePhoto = styled.img`
+	width:100px;
+	height:100px;
+`
+export const MessagePhoto = styled.div`
+	width:90%;
+	height:15px;
+	text-align:center;
+	font-size:12px;
+	color:${white};
+`
+export const SeePhotosUploadSection = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    width:100%;
+    height:auto;
+	margin-bottom:15px;
+    background:${lightGray};
+`
+export const TheuploadCadre = styled.div`
+	width:250px;
+	height:100px;
+	margin-left:auto;
+	margin-right:auto;
+`
+export const TableDates = styled.table`
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+	border:none;
 `

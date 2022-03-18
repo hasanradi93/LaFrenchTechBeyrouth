@@ -13,4 +13,6 @@ routing.route('/newOne')
 routing.route('/:id')
     .put(eventController.uploadPhotosEvent, eventController.editEvent)
     .delete(eventController.deleteEvent)
+routing.route('/deletePhoto/:id')
+    .post(eventController.deletePhotoEvent)
 module.exports = routing

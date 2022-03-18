@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
         cb(null, dir)
     },
     filename: (req, file, cb) => {
-        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        const fileName = file.originalname.toLowerCase().split(' ').join('-')
         cb(null, uuidv4() + '-' + fileName)
     }
 })
@@ -26,7 +26,6 @@ const uploadPhoto = multer({
 })
 const deletePhoto = (folder, photoFile) => {
     let photo = folder + '/' + photoFile
-    console.log("__dirname", __dirname)
     let filePath = path.join(__dirname, "..", photo)
     fs.unlink(filePath, function (err, result) {
         if (err) logger.error('Error', err);

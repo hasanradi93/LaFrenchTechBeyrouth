@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { darkGray, lightGray, white, darkRed, lightRed } from "../../services/colors";
+import { darkGray, lightGray, white, darkRed } from "../../services/colors";
 import { Section } from "../../services/globalStyles";
 export const MembersSection = styled(Section)`
     width:100%;

@@ -20,6 +20,8 @@ const errorHandler = (error, request, response, next) => {
         response.status(401).send({ error: `403- Unauthorized:  ${error.message}` })
     else if (error.name === 'Corrupted')
         response.status(401).send({ error: `401- Corrupted:  ${error.message}` })
+    else if (error.name === 'Oops')
+        response.status(401).send({ error: `Oops- failed:  ${error.message}` })
     next(error)
 }
 const userExtractor = async (request, response, next) => {

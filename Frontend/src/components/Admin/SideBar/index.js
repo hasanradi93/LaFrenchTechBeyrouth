@@ -64,7 +64,14 @@ const SideBar = ({ menuIndex }) => {
                                 Events
                                 <NavLink to="/adminPanel/events" />
                             </MenuItem>
-                            <MenuItem icon={<FaRegHeart />}>Subscribers</MenuItem>
+                            <MenuItem icon={<FaRegHeart />}>
+                                Subscribers
+                                <NavLink to="/adminPanel/subscribers" />
+                            </MenuItem>
+                            <MenuItem icon={<FaRegHeart />}>
+                                Members
+                                <NavLink to="/adminPanel/members" />
+                            </MenuItem>
                             <MenuItem icon={<BiCog />}>Settings</MenuItem>
                             <MenuItem icon={<FiLogOut />}>Profile</MenuItem>
                         </Menu>

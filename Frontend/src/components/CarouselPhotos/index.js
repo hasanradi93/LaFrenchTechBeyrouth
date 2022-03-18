@@ -42,7 +42,7 @@ const CarouselPhotos = ({ photos, width, height }) => {
                 textAlign: "center",
                 maxWidth: "100%",
                 maxHeight: "300px",
-                margin: "40px auto",
+                margin: "10px auto",
             }}
         />
     )

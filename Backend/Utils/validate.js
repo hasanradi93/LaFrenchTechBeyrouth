@@ -4,7 +4,7 @@ const jDate = joi.extend(joiDate)
 const logger = require('../Utils/logger')
 const eventValidation = (data) => {
     const schema = joi.object({
-        title: joi.string().trim().min(10).max(60).required().messages({
+        title: joi.string().trim().min(5).max(60).required().messages({
             'string.base': `Title should be a type of 'text'`,
             'string.empty': `Title cannot be an empty field`,
             'string.min': `Title should have a minimum length of 10`,
@@ -21,7 +21,7 @@ const eventValidation = (data) => {
             'boolean.base': `Active should be yes or no`,
             'boolean.empty': `Active cannot be an empty field`,
             'any.required': `Active is a required field`
-        }),//.greater('now')
+        }),
         availableFromDate: jDate.date().format('YYYY-MM-DD').raw().required().messages({
             'date.base': `From Date should be a valid date`,
             'date.format': `From Date must be in YYYY-MM-DD format`,
@@ -29,25 +29,25 @@ const eventValidation = (data) => {
             'date.greater': `From Date must be greater than today`,
             'any.required': `From Date is a required field`
         }),
-        availableToDate: jDate.date().format('YYYY-MM-DD').raw().required().messages({
+        availableToDate: jDate.date().format('YYYY-MM-DD').greater(jDate.ref('availableFromDate')).greater('now').raw().required().messages({
             'date.base': `To Date should be a valid date`,
             'date.format': `To Date must be in YYYY-MM-DD format`,
-            'date.greater': `To Date must be greater than From Date`,
+            'date.greater': `To Date must be greater than From Date and the current date`,
             'date.empty': `To Date cannot be an empty field`,
             'any.required': `To Date is a required field`
         }),
-        startDate: jDate.date().iso().raw().greater(jDate.ref('availableFromDate')).required().messages({
+        startDate: jDate.date().iso().raw().greater(jDate.ref('availableFromDate')).greater('now').required().messages({
             'date.base': `Start Date should be a valid date`,
             'date.format': `Start Date must be in YYYY-MM-DD HH:MM format`,
-            'date.greater': `Start Date must be greater than From Date`,
+            'date.greater': `Start Date must be greater than From Date and the current date`,
             'date.empty': `Start Date cannot be an empty field`,
             'any.required': `Start Date is a required field`
         }),
-        endDate: jDate.date().iso().raw().min(jDate.ref('startDate')).greater(jDate.ref('availableFromDate')).required().messages({
+        endDate: jDate.date().iso().raw().min(jDate.ref('startDate')).greater(jDate.ref('availableFromDate')).greater('now').required().messages({
             'date.base': `End Date should be a valid date`,
             'date.format': `End Date must be in YYYY-MM-DD HH:MM format`,
-            'date.greater': `End Date must be greater than From Date`,
-            'date.min': `End Date must be greater than Start Date`,
+            'date.greater': `End Date must be greater than From Date and the current date`,
+            'date.min': `End Date must be greater or equal than Start Date`,
             'date.empty': `End Date cannot be an empty field`,
             'any.required': `End Date is a required field`
         }),

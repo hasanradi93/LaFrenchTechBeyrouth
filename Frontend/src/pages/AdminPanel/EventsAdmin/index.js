@@ -10,11 +10,14 @@ const EventsAdminPage = () => {
         <>
             {
                 !loggedIn
-                    ? <img src={process.env.PUBLIC_URL + '/assets/images/loadingTirangles.gif'} width='32px' height='32px' alt='loading' />
+                    ? <div style={{ textAlign: 'center' }}>
+                        <h4>Loading..</h4>
+                        <img src={process.env.PUBLIC_URL + '/assets/images/loadingTirangles.gif'} width='64px' height='64px' alt='loading' />
+                    </div>
                     :
                     <>
                         <SideBar menuIndex={1} />
-                        <EventsAdmin titlePage={'Available New Events'} titlePageSize={'3rem'} />
+                        <EventsAdmin titlePage={'Events Page'} titlePageSize={'3rem'} />
                     </>
             }
         </>

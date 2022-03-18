@@ -31,7 +31,6 @@ const daysInMonth = (month, year) => {
 const getEventsSearch = async (request, response, next) => {
     if (request.user === undefined)
         return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
-    console.log("request.query", request.query)
     const typeSearch = request.query.type
     let nbLimit = request.query.nbLimit
     if (!typeSearch || !nbLimit || Number(nbLimit) < 0)
@@ -47,13 +46,11 @@ const getEventsSearch = async (request, response, next) => {
         date1 = new Date(date1).toISOString().substring(0, 10)
         let date2 = year + '-' + month + '-' + days
         date2 = new Date(date2).toISOString().substring(0, 10)
-        console.log("dat1", date1, "date2", date2)
         const events = await Event.find({ 'deleted.status': false, startDate: { $gte: date1, $lte: date2 } }).limit(nbLimit)
             .populate({ path: 'subscribers', model: 'Subscriber' })
             .sort({ $natural: -1 })
         if (!events.length)
             return next({ name: "Corrupted", message: `No data` })
-        console.log("events", events.length)
         response.status(201).json({ data: events })
     }
     else if (Number(typeSearch) === 2) {
@@ -77,35 +74,48 @@ const getEventsSearch = async (request, response, next) => {
         const order = request.query.order
         const events = await Event.find({ 'deleted.status': false }).sort({ [field]: order }).limit(nbLimit)
             .populate({ path: 'subscribers', model: 'Subscriber' })
-        console.log("events", events)
+        if (!events.length)
+            return next({ name: "Corrupted", message: `No data` })
+        response.status(201).json({ data: events })
+    }
+    else if (Number(typeSearch) === 5) {
+        const field = request.query.field
+        const forType = request.query.forType
+        let bool = true
+        if (Number(forType) === 2)
+            bool = false
+        console.log("bool", bool)
+        const events = await Event.find({ 'deleted.status': false, [field]: bool }).sort({ $natural: -1 }).limit(nbLimit)
+            .populate({ path: 'subscribers', model: 'Subscriber' })
         if (!events.length)
             return next({ name: "Corrupted", message: `No data` })
         response.status(201).json({ data: events })
     }
 }
 const uploadPhotosEvent = uploadPhoto.array('photos')
-const setEvent = async (request, response) => {
+const setEvent = async (request, response, next) => {
     if (request.user === undefined || request.user.userType !== 1)
-        return response.status(403).json({ error: `Unauthorized: You don't have credentials` })
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
     const body = request.body
+    body.location = JSON.parse(body.location)
     const validateEvent = eventValidation(body)
     if (validateEvent.error)
         return response.status(401).json({ error: validateEvent.error.message })
     if (request.files === undefined)
-        return response.status(401).json({ error: 'Photos for event is required' })
+        return next({ name: "ValidationError", message: `Photos for event is required` })
     if (!request.files.length)
-        return response.status(401).json({ error: 'Only .png, .jpg and .jpeg format allowed!' })
+        return next({ name: "ValidationError", message: `Only .png, .jpg and .jpeg format allowed!` })
     const url = request.protocol + '://' + request.get('Host')
     let validatePhoto = ''
     let collectPhotos = []
     request.files.forEach(element => {
         validatePhoto = photoValidation({ photo: element })
         if (validatePhoto.error)
-            return response.status(401).json({ error: validatePhoto.error.message })
+            return next({ name: "ValidationError", message: validatePhoto.error.message })
         collectPhotos.push(url + '/Files/Events/' + element.filename)
     })
     if (collectPhotos.length !== request.files.length)
-        return response.status(401).json({ error: 'Check the photos' })
+        return next({ name: "ValidationError", message: `Check the photos` })
     const newEvent = new Event({
         title: body.title,
         description: body.description,
@@ -124,14 +134,25 @@ const setEvent = async (request, response) => {
     sendAMailEvent(savedEvent)
     response.status(201).json({ data: savedEvent })
 }
-const editEvent = async (request, response) => {
-    if (request.cookies.User_LoggedIn === undefined || request.user === undefined || request.user.userType !== 1)
-        return response.status(403).json({ error: `Unauthorized: You don't have credentials` })
+const editEvent = async (request, response, next) => {
+    if (request.user === undefined || request.user.userType !== 1)
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
     const body = request.body
+    body.location = JSON.parse(body.location)
     const _id = request.params
-    const validate = eventValidation(body)
+    const validate = eventValidation({
+        "title": body.title,
+        "description": body.description,
+        "active": body.active,
+        "availableFromDate": body.availableFromDate,
+        "availableToDate": body.availableToDate,
+        "startDate": body.startDate,
+        "endDate": body.endDate,
+        "address": body.address,
+        "location": body.location
+    })
     if (validate.error)
-        return response.status(401).json({ error: validate.error.message })
+        return next({ name: "ValidationError", message: validate.error.message })
     const url = request.protocol + '://' + request.get('Host')
     let editedEvent = {
         title: body.title,
@@ -152,15 +173,30 @@ const editEvent = async (request, response) => {
         request.files.forEach(element => {
             validatePhoto = photoValidation({ photo: element })
             if (validatePhoto.error)
-                return response.status(401).json({ error: validatePhoto.error.message })
+                return next({ name: "ValidationError", message: validate.error.message })
             collectPhotos.push(url + '/Files/Events/' + element.filename)
         })
         if (collectPhotos.length !== request.files.length)
-            return response.status(401).json({ error: 'Check the photos' })
+            return next({ name: "ValidationError", message: 'Check the photos' })
+        const theEvent = await Event.findById(ObjectId(_id))
+        for (let i = 0; i < theEvent.photos.length; i++) {
+            collectPhotos.push(theEvent.photos[i])
+        }
         editedEvent["photos"] = collectPhotos
     }
     const updatedEvent = await Event.findByIdAndUpdate(ObjectId(_id), editedEvent, { new: true })
     response.status(201).json({ data: updatedEvent })
+}
+const deletePhotoEvent = async (request, response, next) => {
+    if (request.user === undefined || request.user.userType !== 1)
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
+    const _id = request.params
+    const event = await Event.findById(ObjectId(_id))
+    let eventArrPhotos = event.photos.filter(ph => (ph !== request.body.photo))
+    event["photos"] = eventArrPhotos
+    deletePhoto('/Files/Events', request.body.photo.split('Events')[1])
+    const updatedEvent = await Event.findByIdAndUpdate(ObjectId(_id), event, { new: true })
+    response.status(204).end()
 }
 const deleteEvent = async (request, response, next) => {
     if (request.user === undefined || request.user.userType !== 1)
@@ -178,4 +214,4 @@ const deleteEvent = async (request, response, next) => {
         return next({ name: "CastError", message: `Error happening!, Event not deleted` })
     response.status(204).end()
 }
-module.exports = { getLatestEventsVisitor, getEventsAvailableVisitor, getEventsAvailableAdmin, getEventsSearch, uploadPhotosEvent, setEvent, editEvent, deleteEvent }
+module.exports = { getLatestEventsVisitor, getEventsAvailableVisitor, getEventsAvailableAdmin, getEventsSearch, uploadPhotosEvent, setEvent, editEvent, deletePhotoEvent, deleteEvent }

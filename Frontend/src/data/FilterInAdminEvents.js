@@ -1,4 +1,4 @@
-export const cmbFilter = ["Filter by", "Month/year", "Title", "Address", "Subscribers"]
+export const cmbFilter = ["Filter by", "Month/year", "Title", "Address", "Subscribers", "Active"]
 export const months = [
     'Jan',
     'Feb',

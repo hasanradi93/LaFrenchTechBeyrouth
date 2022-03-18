@@ -4,14 +4,15 @@ const { memberValidation, photoValidation } = require('../Utils/validate')
 const { uploadPhoto, deletePhoto } = require('../Utils/uploadFile')
 const { ObjectId } = require('mongodb')
 const getMembers = async (request, response) => {
-    const members = await Member.find({})
+    const members = await Member.find({}).sort({ $natural: -1 })
     response.json(members)
 }
 const uploadPhotoMember = uploadPhoto.single("photo")
 const setMember = async (request, response) => {
-    if (request.cookies.User_LoggedIn === undefined || request.user === undefined || request.user.userType !== 1)
+    if (request.user === undefined || request.user.userType !== 1)
         return response.status(403).json({ error: `Unauthorized: You don't have credentials` })
     const body = request.body
+    body.social = JSON.parse(body.social)
     const validate = memberValidation({ fName: body.fName, lName: body.lName, position: body.position, social: body.social })
     if (validate.error)
         return response.status(401).json({ error: validate.error.message })
@@ -34,10 +35,11 @@ const setMember = async (request, response) => {
     response.status(201).json({ data: savedMember })
 }
 const editMember = async (request, response) => {
-    if (request.cookies.User_LoggedIn === undefined || request.user === undefined || request.user.userType !== 1)
+    if (request.user === undefined || request.user.userType !== 1)
         return response.status(403).json({ error: `Unauthorized: You don't have credentials` })
     const body = request.body
     const _id = request.params
+    body.social = JSON.parse(body.social)
     const validate = memberValidation({ fName: body.fName, lName: body.lName, position: body.position, social: body.social })
     if (validate.error)
         return response.status(401).json({ error: validate.error.message })
@@ -60,8 +62,8 @@ const editMember = async (request, response) => {
     const updatedMember = await Member.findByIdAndUpdate(ObjectId(_id), editedMember, { new: true })
     response.status(201).json({ data: updatedMember })
 }
-const deleteMember = async (request, response) => {
-    if (request.cookies.User_LoggedIn === undefined || request.user === undefined || request.user.userType !== 1)
+const deleteMember = async (request, response, next) => {
+    if (request.user === undefined || request.user.userType !== 1)
         return response.status(403).json({ error: `Unauthorized: You don't have credentials` })
     const _id = request.params
     const getMember = await Member.findById(ObjectId(_id))

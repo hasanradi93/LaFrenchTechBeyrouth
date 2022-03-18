@@ -11,7 +11,10 @@ const AdminPage = () => {
         <>
             {
                 !loggedIn
-                    ? <img src={process.env.PUBLIC_URL + '/assets/images/loadingTirangles.gif'} width='32px' height='32px' alt='loading' />
+                    ? <div style={{ textAlign: 'center' }}>
+                        <h4>Loading..</h4>
+                        <img src={process.env.PUBLIC_URL + '/assets/images/loadingTirangles.gif'} width='64px' height='64px' alt='loading' />
+                    </div>
                     : <>
                         <SideBar menuIndex={0} />
                         <h1>Welcome {userInfo.fullName}</h1>

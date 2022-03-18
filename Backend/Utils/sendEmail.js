@@ -33,7 +33,7 @@ const getEmailsSubscribers = async (eventId) => {
     logger.info("emails", emails)
     return emails
 }
-const sendAMailEvent = (event) => {
+const sendAMailEvent = async (event) => {
     const beirutStartDate = moment.tz(event.startDate, 'Asia/Beirut').toString()
     const dubaiDateDate = moment.tz(event.startDate, 'Asia/Dubai').toString()
     let hourToSend = beirutStartDate.split(' ')[4].split(':')[0]
@@ -87,7 +87,30 @@ const sendAMailContact = async (data) => {
         if (error)
             logger.error("ERROR sending mail", error)
         else
-            logger.info("Succesfully sending mail to subscribers", info)
+            logger.info("Succesfully sending mail to company mail", info)
     })
 }
-module.exports = { sendAMailEvent, sendAMailContact }
+const sendSubscriptionDone = async (event, mailSubscriber) => {
+    const emailCompany = await getEmailCompany.companyMail()
+    const beirutStartDate = moment.tz(event.startDate, 'Asia/Beirut').toString()
+    const dubaiDateDate = moment.tz(event.startDate, 'Asia/Dubai').toString()
+    const messageContent = `<h2 align='center'>La French Tech Beyrouth</h2>
+    <h3>Subscription done successfully</h3>
+    <h4><u><b>Event:</b></u> ${event.title}</h4>
+    <p><b>Content:</b> ${event.description}</p>
+    <p><b>Dates:</b> Beirut ${beirutStartDate} | UAE ${dubaiDateDate}</p>`
+    const mailOptions = {
+        from: emailCompany,
+        to: mailSubscriber,
+        subject: `Welcome to LA French Tech Beyrouth`,
+        text: messageContent,
+        html: messageContent
+    }
+    transporterByMyMail.sendMail(mailOptions, function (error, info) {
+        if (error)
+            logger.error("ERROR sending mail", error)
+        else
+            logger.info("Succesfully sending mail to subscriber", info)
+    })
+}
+module.exports = { sendAMailEvent, sendAMailContact, sendSubscriptionDone }

@@ -43,7 +43,7 @@ const checkIfStillLogin = async (request, response, next) => {
     console.log("request.user", request.user)
     if (request.user === undefined)
         return next({ name: "JsonWebTokenError", message: 'Invalid token' })
-    response.status(201).json({ fullName: request.user.fName + ' ' + request.user.lName, email: request.user.email, username: request.user.username })
+    response.status(201).json({ fullName: request.user.fName + ' ' + request.user.lName, firstName: request.user.fName, lastName: request.user.lName, email: request.user.email, username: request.user.username })
 }
 const userLogout = async (request, response) => {
     logger.info("--------BEFORE DELETE COOKIE | RESPONSE--------")

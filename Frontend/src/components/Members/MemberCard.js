@@ -33,7 +33,7 @@ const MemberCard = ({ data }) => {
                 {
                     data.social.facebook
                         ? <SocialIcon
-                            href={data.facebook}
+                            href={data.social.facebook}
                             target="_blank"
                             aria-label='Facebook'
                         >

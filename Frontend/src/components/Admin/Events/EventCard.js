@@ -15,8 +15,7 @@ import {
     , SpanSide2
     , ButtonInEvents2
 } from './EventsStyles'
-import { TextWrapper } from '../../../services/globalStyles'
-import { darkGray, darkRed } from '../../../services/colors'
+import { darkGray } from '../../../services/colors'
 import Modal from '../../Modal'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 const EventCard = ({ data, id, pageName, handleAction }) => {
@@ -69,30 +68,14 @@ const EventCard = ({ data, id, pageName, handleAction }) => {
                     <EventCardDetails height={'200px'} overflow={'hidden'} id={'content' + id}>
                         <div className="preview" dangerouslySetInnerHTML={createMarkup(data.description)}></div>
                     </EventCardDetails>
-                    {/* <TextWrapper
-                        fontSize={'10px'}
-                        color={darkRed}
-                        textAlign={'center'}
-                    >
-                        Press View more to see full description
-                    </TextWrapper> */}
-                    {/* <ButtonEvent
-                        transition={{ delay: 1, duration: 0.6 }}
-                        inverse={false}
-                        style={{ opacity: '1 !important' }}
-                        onClick={toggleModal}>
-                        View more
-                    </ButtonEvent> */}
                     <DivTwoSide>
-                        <SpanSide2>
-                            <ButtonInEvents2
-                                onClick={() => handleActionChild('Edit')}
-                            >
+                        <SpanSide2 onClick={() => handleActionChild('Edit')}>
+                            <ButtonInEvents2>
                                 {iconStyle(FaEdit)}
                             </ButtonInEvents2>
                         </SpanSide2>
-                        <SpanSide2>
-                            <ButtonInEvents2 onClick={() => handleActionChild('Delete')}>
+                        <SpanSide2 onClick={() => handleActionChild('Delete')}>
+                            <ButtonInEvents2>
                                 {iconStyle(FaTrashAlt)}
                             </ButtonInEvents2>
                         </SpanSide2>

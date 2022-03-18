@@ -37,6 +37,27 @@ class ConnectWithBackend {
         }
         return connect.get('api/hidden/events/getForAdmin', config)
     }
+    searchEvents(cookieName, textSearch) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.get(`api/hidden/events/getBySearch?${textSearch}`, config)
+    }
+    addEvent(cookieName, data) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.post(`api/hidden/events/newOne`, data, config)
+    }
+    editEvent(cookieName, data, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.put(`api/hidden/events/${id}`, data, config)
+    }
     deleteEvent(cookieName, id) {
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
@@ -44,12 +65,54 @@ class ConnectWithBackend {
         }
         return connect.delete(`api/hidden/events/${id}`, config)
     }
-    searchEvents(cookieName, textSearch) {
+    deletePhotoEvent(cookieName, data, id) {
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
         }
-        return connect.get(`api/hidden/events/getBySearch?${textSearch}`, config)
+        return connect.post(`api/hidden/events/deletePhoto/${id}`, data, config)
+    }
+    addMember(cookieName, data) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.post(`api/hidden/members`, data, config)
+    }
+    editMember(cookieName, data, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.put(`api/hidden/members/${id}`, data, config)
+    }
+    deleteMember(cookieName, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.delete(`api/hidden/members/${id}`, config)
+    }
+    getSubscribers(cookieName) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.get('api/hidden/subscribers', config)
+    }
+    searchSubscribers(cookieName, textSearch) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.get(`api/hidden/subscribers/getBySearch?${textSearch}`, config)
+    }
+    editInitialProfileDataAdmin(cookieName, data, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.put(`api/hidden/members/${id}`, data, config)
     }
 }
 export default new ConnectWithBackend()

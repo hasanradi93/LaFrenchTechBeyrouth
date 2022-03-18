@@ -1,10 +1,11 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { EventsSection } from './EventsStyles'
 import Events from './Events'
 import { TitlePage } from './EventsStyles'
 import FilterSection from './FilterSection'
 import backend from '../../../services/ConnectWithBackend'
-const EventsAdmin = ({ titlePage, titlePageSize }) => {
+
+const EventsAdmin = ({ titlePage, titlePageSize }) => {//1234!@wW
     const [theTitle, setTheTitle] = useState('null')
     const [titleSize, setTitleSize] = useState(null)
     const [events, setEvents] = useState(null)
@@ -13,6 +14,7 @@ const EventsAdmin = ({ titlePage, titlePageSize }) => {
     const [searchData2, setSearchData2] = useState(null)
     const [limit, setLimit] = useState(0)
     const [message, setMessage] = useState()
+
     useEffect(() => {
         getForAdmin()
         setTheTitle(titlePage)
@@ -55,12 +57,60 @@ const EventsAdmin = ({ titlePage, titlePageSize }) => {
         }, 7000)
     }
 
+    const editTheEvent = (event) => {
+        let id = event.get('id')
+        backend
+            .editEvent('LaFrenchTechToken', event, id)
+            .then(response => {
+                setMessage('Event edited successfully')
+                let foundIndex = events.findIndex(x => x.id === id);
+                events[foundIndex] = response.data.data
+                setEvents(events)
+            })
+            .catch(error => {
+                console.log("edit event error", error)
+                setMessage(error.response.data.error)
+            })
+        let intervalData = setInterval(() => {
+            setMessage(undefined)
+            clearInterval(intervalData)
+        }, 7000)
+    }
+
+    const addTheEvent = (event) => {
+        backend
+            .addEvent('LaFrenchTechToken', event)
+            .then(response => {
+                setEvents(prevEvents => prevEvents.concat(response.data.data))
+                setMessage("Event added successfully")
+            })
+            .catch(error => setMessage(error.response.data.error))
+        let intervalData = setInterval(() => {
+            setMessage(undefined)
+            clearInterval(intervalData)
+        }, 7000)
+    }
+
     const reducer = (event, action) => {
         switch (action) {
             case "Edit":
-                return alert("edit")
+                console.log("eventEdited in index ", event)
+                if (event) {
+                    editTheEvent(event)
+                }
+                else {
+                    setMessage("Check the data entered, something wrong!")
+                }
+                break
             case "Add":
-                return alert("add")
+                console.log("eventAdd in index ", event)
+                if (event) {
+                    addTheEvent(event)
+                }
+                else {
+                    setMessage("Check the data entered, something wrong!")
+                }
+                break
             case "Delete":
                 if (window.confirm('Do you want to delete this Event?')) {
                     deleteEvent(event.id)
@@ -68,9 +118,6 @@ const EventsAdmin = ({ titlePage, titlePageSize }) => {
                 }
                 break
             case "Search":
-                console.log("FilterBySearch", filterBy)
-                console.log("searchdAta1", searchData1)
-                console.log("searchdAta2", searchData2)
                 let data = ``
                 let yourSearch = ``
                 let send = false
@@ -114,7 +161,20 @@ const EventsAdmin = ({ titlePage, titlePageSize }) => {
                         send = true
                     }
                 }
-                else if (Number(filterBy) > 4 || Number(filterBy) <= 0) {
+                else if (Number(filterBy) === 5) {
+                    if (Number(searchData1) !== 1 && Number(searchData1) !== 2)
+                        setMessage("Please choose active or not")
+                    else {
+                        setMessage(undefined)
+                        let choosed = "Active"
+                        if (Number(searchData1) === 2)
+                            choosed = "Not Acitve"
+                        data = `type=5&field=active&forType=${searchData1}&nbLimit=${limit}`
+                        yourSearch = `Filter:active - for=${choosed} - limit=${limit}`
+                        send = true
+                    }
+                }
+                else if (Number(filterBy) > 5 || Number(filterBy) <= 0) {
                     setMessage("Please choose filter by")
                 }
                 if (send) {
@@ -147,6 +207,7 @@ const EventsAdmin = ({ titlePage, titlePageSize }) => {
                 message={message}
                 setMessage={setMessage}
             />
+
         </EventsSection>
     )
 }

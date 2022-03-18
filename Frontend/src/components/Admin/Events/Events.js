@@ -10,7 +10,6 @@ import EventCard from './EventCard'
 const Events = ({ pageName, events, handleAction, message, setMessage }) => {
     return (
         <EventsContainer>
-            {console.log("eventssss", events)}
             {message === undefined
                 ? (
                     events !== null

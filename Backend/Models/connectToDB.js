@@ -4,6 +4,7 @@ const config = require('../Utils/config')
 logger.info(`----------------------------`)
 logger.info(`Loading connecting to Database:`)
 const main = async () => {
+    //mongodb://127.0.0.1:27017/LaFrenchTech
     logger.info(`URL: ${config.Mongo_Uri}`)
     await mongoose.connect(config.Mongo_Uri)
         .then(() => {

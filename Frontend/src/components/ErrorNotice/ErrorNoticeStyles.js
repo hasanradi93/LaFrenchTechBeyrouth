@@ -5,6 +5,7 @@ export const ErrorContainer = styled.div`
     height:${({ height }) => (height ? height : '35px')};
     display:flex;
     margin-bottom:10px;
+    z-index:999999;
 `
 export const Error = styled.span`
     width: 100%;
