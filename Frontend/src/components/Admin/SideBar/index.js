@@ -13,7 +13,8 @@ import {
 } from "react-pro-sidebar"
 
 //import icons from react icons
-import { FaList, FaRegHeart } from "react-icons/fa";
+import { FaAt, FaList, FaMendeley } from "react-icons/fa"
+import { CgProfile } from "react-icons/cg"
 import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { BiCog } from "react-icons/bi";
 
@@ -64,16 +65,22 @@ const SideBar = ({ menuIndex }) => {
                                 Events
                                 <NavLink to="/adminPanel/events" />
                             </MenuItem>
-                            <MenuItem icon={<FaRegHeart />}>
+                            <MenuItem active={menuIndex === 2 ? true : false} icon={<FaAt />}>
                                 Subscribers
                                 <NavLink to="/adminPanel/subscribers" />
                             </MenuItem>
-                            <MenuItem icon={<FaRegHeart />}>
+                            <MenuItem active={menuIndex === 3 ? true : false} icon={<FaMendeley />}>
                                 Members
                                 <NavLink to="/adminPanel/members" />
                             </MenuItem>
-                            <MenuItem icon={<BiCog />}>Settings</MenuItem>
-                            <MenuItem icon={<FiLogOut />}>Profile</MenuItem>
+                            <MenuItem active={menuIndex === 4 ? true : false} icon={<CgProfile />}>
+                                Profile
+                                <NavLink to="/adminPanel/profile" />
+                            </MenuItem>
+                            <MenuItem active={menuIndex === 5 ? true : false} icon={<BiCog />}>
+                                Settings
+                                <NavLink to="/adminPanel/settings" />
+                            </MenuItem>
                         </Menu>
                     </SidebarContent>
                     <SidebarFooter>

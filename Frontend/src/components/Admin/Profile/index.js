@@ -1,13 +1,14 @@
 import React from 'react'
-import { Line, ProfileAdminSection, SectionDataDiv } from './ProfileStyles'
+import { Line, ProfileAdminSection, SectionDataDiv, TitlePage } from './ProfileStyles'
 import InitialData from './InitialData'
 import UsernameData from './UsernameData'
 import EmailData from './EmailData'
 import PasswordData from './PasswordData'
 
-const ProfileAdmin = () => {
+const ProfileAdmin = ({ titlePage, titlePageSize }) => {
     return (
         <ProfileAdminSection>
+            <TitlePage fontSize={titlePageSize}>{titlePage}</TitlePage>
             <SectionDataDiv>
                 <InitialData />
             </SectionDataDiv>

@@ -1,13 +1,19 @@
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { darkGray, darkRed, lightGray, white } from "../../../services/colors"
-import { Section } from '../../../services/globalStyles'
+import { MainHeading1, Section } from '../../../services/globalStyles'
 
 export const ProfileAdminSection = styled(Section)`
     width:80% !important;
     margin-left:auto;
     margin-right:auto;
     &${Section}
+`
+export const TitlePage = styled(MainHeading1)`
+    &${MainHeading1}
+    color:${lightGray};
+	background:${lightGray};
+	font-size:${({ fontSize }) => (fontSize ? fontSize : '2rem')}
 `
 export const SectionDataDiv = styled(motion.div)`
     width:100%;

@@ -4,6 +4,7 @@ const cron = require('node-cron')
 const moment = require('moment-timezone')
 const getSubscribers = require('../Controllers/subscriber')
 const getEmailCompany = require('../Controllers/company')
+const saveMailsSent = require('../Controllers/mails')
 const logger = require('./logger')
 const transporterByMyMail = nodemailer.createTransport({
     service: 'Gmail', // sets automatically host, port and connection security settings
@@ -48,6 +49,8 @@ const sendAMailEvent = async (event) => {
     const daysNamesArr = [daysNames[dateOfDays[0].getUTCDay()], daysNames[dateOfDays[1].getUTCDay()], daysNames[dateOfDays[2].getUTCDay()]]
     const monthNamesArr = [monthsNames[dateOfDays[0].getUTCMonth()], monthsNames[dateOfDays[1].getUTCMonth()], monthsNames[dateOfDays[2].getUTCMonth()]]
     const datesToSend = [`${timeToSend} ${hourToSend} ${(days[0])} ${monthNamesArr[0]} ${daysNamesArr[0]}`, `00 16 ${(days[1])} ${monthNamesArr[1]} ${daysNamesArr[1]}`, `00 16 ${(days[2])} ${monthNamesArr[2]} ${daysNamesArr[2]}`]
+    logger.info("days", days)
+    logger.info("dateOfDays", dateOfDays)
     logger.info("datesToSend", datesToSend)
     for (let i = 0; i < datesToSend.length; i++) {
         cron.schedule(datesToSend[i].toString(), async () => {
@@ -66,8 +69,11 @@ const sendAMailEvent = async (event) => {
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error)
                     logger.error("ERROR sending mail", error)
-                else
+                else {
                     logger.info("Succesfully sending mail to subscribers", info)
+                    saveMailsSent.mailsForEvent(event.id, subscribersMails)
+                }
+
             })
         })
     }

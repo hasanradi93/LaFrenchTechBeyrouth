@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Outlet, } from 'react-router-dom'
+import HomePageAdmin from '../../components/Admin/HomePage'
 import SideBar from '../../components/Admin/SideBar'
 import AuthContext from '../../services/AuthContext'
 
@@ -17,7 +18,7 @@ const AdminPage = () => {
                     </div>
                     : <>
                         <SideBar menuIndex={0} />
-                        <h1>Welcome {userInfo.fullName}</h1>
+                        <HomePageAdmin fullName={userInfo.fullName} />
                     </>
             }
             <Outlet />

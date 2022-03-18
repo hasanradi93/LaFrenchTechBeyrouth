@@ -15,7 +15,7 @@ const CompanyAdminPage = () => {
                     </div>
                     :
                     <>
-                        <SideBar menuIndex={1} />
+                        <SideBar menuIndex={5} />
                         <CompanyAdmin titlePage={'Company Page'} titlePageSize={'3rem'} />
                     </>
             }

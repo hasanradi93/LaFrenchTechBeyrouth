@@ -149,5 +149,12 @@ class ConnectWithBackend {
         }
         return connect.put(`api/hidden/company/${id}`, data, config)
     }
+    getMailsData(cookieName) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.get('api/hidden/mails', config)
+    }
 }
 export default new ConnectWithBackend()
