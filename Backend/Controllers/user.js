@@ -33,12 +33,14 @@ const setUser = async (request, response) => {
     const savedUser = await newUser.save()
     response.status(201).json({ data: savedUser })
 }
-const editUserData = async (request, response) => {
+const editUserData = async (request, response, next) => {
+    if (request.user === undefined)
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
     const body = request.body
     const _id = request.params
     const validate = userValidationOtherData(body)
     if (validate.error)
-        return response.status(401).json({ error: validate.error.message })
+        return next({ name: "ValidationError", message: validate.error.message })
     const editedUser = {
         fName: body.fName,
         lName: body.lName,
@@ -49,69 +51,73 @@ const editUserData = async (request, response) => {
     const updatedUser = await User.findByIdAndUpdate(ObjectId(_id), user, { new: true })
     response.status(201).json({ data: updatedUser })
 }
-const editUserEmail = async (request, response) => {
+const editUserEmail = async (request, response, next) => {
+    if (request.user === undefined)
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
     const body = request.body
     const _id = request.params
     const validate = userValidationEmail(body)
     if (validate.error)
-        return response.status(401).json({ error: validate.error.message })
+        return next({ name: "ValidationError", message: validate.error.message })
     const user = await User.findById(ObjectId(_id))
     if (user && user.email === body.email)
-        return response.status(401).json({ error: 'Email is the same' })
+        return next({ name: "ValidationError", message: 'Email is the same' })
     const checkExistingEmail = await User.find({ email: body.email })
     if (checkExistingEmail.length)
-        return response.status(401).json({ error: 'Email already exist' })
+        return next({ name: "ValidationError", message: 'Email already exist' })
     const editedUser = { email: body.email }
     Object.assign(user, editedUser)
-    if (request.cookies.User_LoggedIn === undefined)
-        return response.status(401).json({ error: `Unauthorized: You don't have credentials` })
     const updatedUser = await User.findByIdAndUpdate(ObjectId(_id), user, { new: true })
     if (request.user.id === user.id)
         logout.userLogout(request, response)
     else
         response.status(201).json({ data: updatedUser })
 }
-const editUserUsername = async (request, response) => {
+const editUserUsername = async (request, response, next) => {
+    if (request.user === undefined)
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
     const body = request.body
     const _id = request.params
     const validate = userValidationUsername(body)
     if (validate.error)
-        return response.status(401).json({ error: validate.error.message })
+        return next({ name: "ValidationError", message: validate.error.message })
     const user = await User.findById(ObjectId(_id))
+    const passwordCorrect = user === null ? false : await bcrypt.compare(body.password, user.password)
+    if (!(user && passwordCorrect))
+        return next({ name: "UnAuthorizedError", message: 'Invalid username/email and/or password' })
     logger.info("user", user)
     if (user && user.username === body.username)
-        return response.status(401).json({ error: 'Username is the same' })
+        return next({ name: "Corrupted", message: 'Username is the same' })
     const checkExistingUsername = await User.find({ username: body.username })
     if (checkExistingUsername.length)
-        return response.status(401).json({ error: 'Username already exist' })
+        return next({ name: "Corrupted", message: 'Username already exist' })
     const editedUser = { username: body.username }
     Object.assign(user, editedUser)
-    logger.info("request.cookies.User_LoggedIn", request.cookies.User_LoggedIn)
-    if (request.cookies.User_LoggedIn === undefined)
-        return response.status(401).json({ error: `Unauthorized: You don't have credentials` })
     const updatedUser = await User.findByIdAndUpdate(ObjectId(_id), user, { new: true })
-    logger.info("request.user", request.user)
     if (request.user.id === user.id)
         logout.userLogout(request, response)
     else
         response.status(201).json({ data: updatedUser })
 }
-const editUserPassword = async (request, response) => {
+const editUserPassword = async (request, response, next) => {
+    if (request.user === undefined)
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
     const body = request.body
     const _id = request.params
-    const validate = userValidationPassword(body)
+    const validate = userValidationPassword({ password: body.newPassword })
     const user = await User.findById(ObjectId(_id))
     if (validate.error)
-        return response.status(401).json({ error: validate.error.message })
-    const checkPassword = await bcrypt.compare(body.password, user.password)
-    if (checkPassword)
-        return response.status(401).json({ error: "Password is the same" })
+        return next({ name: "ValidationError", message: validate.error.message })
+    const checkPasswordOld = await bcrypt.compare(body.oldPassword, user.password)
+    if (checkPasswordOld)
+        return next({ name: "ValidationError", message: "Old pasword incorrect" })
+    const checkPasswordNew = await bcrypt.compare(body.oldPassword, user.password)
+    if (checkPasswordNew)
+        return next({ name: "ValidationError", message: "New password is the same old" })
     const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.password, saltRounds)
+    const passwordHash = await bcrypt.hash(, saltRounds)
     const editedUser = { password: passwordHash }
     Object.assign(user, editedUser)
-    if (request.cookies.User_LoggedIn === undefined)
-        return response.status(401).json({ error: `Unauthorized: You don't have credentials` })
     const updatedUser = await User.findByIdAndUpdate(ObjectId(_id), user, { new: true })
     if (request.user.id === user.id)
         logout.userLogout(request, response)

@@ -1,6 +1,9 @@
 import React from 'react'
+import { Line, ProfileAdminSection, SectionDataDiv } from './ProfileStyles'
 import InitialData from './InitialData'
-import { ProfileAdminSection, SectionDataDiv } from './ProfileStyles'
+import UsernameData from './UsernameData'
+import EmailData from './EmailData'
+import PasswordData from './PasswordData'
 
 const ProfileAdmin = () => {
     return (
@@ -8,9 +11,15 @@ const ProfileAdmin = () => {
             <SectionDataDiv>
                 <InitialData />
             </SectionDataDiv>
+            <Line />
             <SectionDataDiv>
-                <UsernameEmailData />
+                <UsernameData />
             </SectionDataDiv>
+            <Line />
+            <SectionDataDiv>
+                <EmailData />
+            </SectionDataDiv>
+            <Line />
             <SectionDataDiv>
                 <PasswordData />
             </SectionDataDiv>

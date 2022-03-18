@@ -8,22 +8,33 @@ import ErrorNotice from '../../ErrorNotice'
 const InitialData = () => {
     const iconStyle = (Icon) => <Icon />
     const { userInfo } = useContext(AuthContext)
-    const [firstName, setFirstName] = useState(null)
-    const [lastName, setLasttName] = useState(null)
+    const [companyId, setCompanyId] = useState(null)
+    const [companyEmail, setCompanyEmail] = useState(null)
+    const [companyPhone, setCompanyPhone] = useState(null)
     const [messageMini, setMessageMini] = useState(undefined)
     useEffect(() => {
-        setFirstName(userInfo.firstName)
-        setLasttName(userInfo.lastName)
+        backend
+            .getCompanyDataAdmin('LaFrenchTechToken')
+            .then(response => {
+                console.log("response.data.data", response.data.data)
+                setCompanyId(response.data.data.id)
+                setCompanyEmail(response.data.data.email)
+                setCompanyPhone(response.data.data.phone)
+            })
+            .catch(error => {
+                console.log("error.response.data.error", error.response.data.error)
+                setMessageMini(error.response.data.error)
+            })
     }, [])
 
     const updateData = () => {
-        if (firstName && lastName) {
-            const data = { "fName": firstName, "lName": lastName, "userType": 1 }
+        if (companyEmail && companyPhone) {
+            const data = { "phone": companyPhone, "email": companyEmail }
             backend
-                .editInitialProfileDataAdmin('LaFrenchTechToken', data, userInfo.id)
+                .editCompanyDataAdmin('LaFrenchTechToken', data, companyId)
                 .then(response => {
                     console.log("response.data.data", response.data.data)
-                    setMessageMini("Information updated successfully")
+                    setMessageMini("Company data updated successfully")
                 })
                 .catch(error => {
                     console.log("error.response.data.error", error.response.data.error)
@@ -39,12 +50,12 @@ const InitialData = () => {
         <SetDataDiv>
             <DivTwoSide>
                 <SpanSideCard>
-                    <InputBox type='text' placeholder='Enter the first name' value={firstName} onChange={(e) => setFirstName(e.targetvalue)} />
+                    <InputBox type='text' placeholder='Enter the company email' value={companyEmail} onChange={(e) => setCompanyEmail(e.targetvalue)} />
                 </SpanSideCard>
             </DivTwoSide>
             <DivTwoSide>
                 <SpanSideCard>
-                    <InputBox type='text' placeholder='Enter the last name' value={lastName} onChange={(e) => setLasttName(e.targetvalue)} />
+                    <InputBox type='text' placeholder='Enter the company phone' value={companyPhone} onChange={(e) => setCompanyPhone(e.targetvalue)} />
                 </SpanSideCard>
             </DivTwoSide>
             <DivTwoSide>

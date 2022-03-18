@@ -112,7 +112,42 @@ class ConnectWithBackend {
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
         }
-        return connect.put(`api/hidden/members/${id}`, data, config)
+        return connect.put(`api/hidden/users/${id}`, data, config)
+    }
+    editUsernameDataAdmin(cookieName, data, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.put(`api/hidden/users/username/${id}`, data, config)
+    }
+    editEmailDataAdmin(cookieName, data, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.put(`api/hidden/users/email/${id}`, data, config)
+    }
+    editPasswordDataAdmin(cookieName, data, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.put(`api/hidden/users/password/${id}`, data, config)
+    }
+    getCompanyDataAdmin(cookieName) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.get('api/hidden/company', config)
+    }
+    editCompanyDataAdmin(cookieName, data, id) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.put(`api/hidden/company/${id}`, data, config)
     }
 }
 export default new ConnectWithBackend()

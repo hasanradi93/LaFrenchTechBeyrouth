@@ -16,6 +16,8 @@ import AdminPage from './pages/AdminPanel'
 import EventsAdminPage from './pages/AdminPanel/EventsAdmin'
 import MembersAdminPage from './pages/AdminPanel/MembersAdmin'
 import SubscribersAdminPage from './pages/AdminPanel/SubscribersAdmin'
+import ProfileAdminPage from './pages/AdminPanel/ProfileAdminPage'
+import CompanyAdminPage from './pages/AdminPanel/CompanyAdminPage'
 import { AuthContextProvider } from './services/AuthContext'
 function App() {
   const { t } = useTranslation()
@@ -43,6 +45,8 @@ function App() {
             <Route path="events" element={<EventsAdminPage />} />
             <Route path="members" element={<MembersAdminPage />} />
             <Route path="subscribers" element={<SubscribersAdminPage />} />
+            <Route path="profile" element={<ProfileAdminPage />} />
+            <Route path="settings" element={<CompanyAdminPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

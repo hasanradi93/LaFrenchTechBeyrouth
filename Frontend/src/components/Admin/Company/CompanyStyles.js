@@ -1,11 +1,6 @@
-import { motion } from 'framer-motion'
-import styled from 'styled-components'
-import {
-    white,
-    lightGray,
-    darkRed,
-    darkGray
-} from '../../../services/colors'
+import { motion } from "framer-motion"
+import styled from "styled-components"
+import { darkGray, darkRed, lightGray, white } from "../../../services/colors"
 import { Section } from '../../../services/globalStyles'
 
 export const ProfileAdminSection = styled(Section)`
