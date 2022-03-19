@@ -12,13 +12,14 @@ const AdminPage = () => {
         <>
             {
                 !loggedIn
-                    ? <div style={{ textAlign: 'center' }}>
+                    ?
+                    <div style={{ textAlign: 'center' }}>
                         <h4>Loading..</h4>
                         <img src={process.env.PUBLIC_URL + '/assets/images/loadingTirangles.gif'} width='64px' height='64px' alt='loading' />
                     </div>
                     : <>
                         <SideBar menuIndex={0} />
-                        <HomePageAdmin fullName={userInfo.fullName} />
+                        <HomePageAdmin titlePage={'Dashboard'} titlePageSize={'3rem'} fullName={userInfo.fullName} />
                     </>
             }
             <Outlet />

@@ -36,9 +36,12 @@ const MemberCard = ({ data, handleAction, setMessage }) => {
         setFName(data.fName)
         setLName(data.lName)
         setPosition(data.position)
-        setFacebook(data.social.facebook)
-        setTwitter(data.social.twitter)
-        setLinkedIn(data.social.linkedIn)
+        if (data.social.facebook)
+            setFacebook(data.social.facebook)
+        if (data.social.twitter)
+            setTwitter(data.social.twitter)
+        if (data.social.linkedIn)
+            setLinkedIn(data.social.linkedIn)
         setPhoto(data.photo)
     }, [])
 
@@ -183,7 +186,7 @@ const MemberCard = ({ data, handleAction, setMessage }) => {
                     :
                     <MemberSocialMedia>
                         {
-                            facebook
+                            facebook !== '0'
                                 ? <SocialIcon
                                     href={data.social.facebook}
                                     target="_blank"
@@ -193,7 +196,7 @@ const MemberCard = ({ data, handleAction, setMessage }) => {
                                 </SocialIcon> : ''
                         }
                         {
-                            twitter
+                            twitter !== '0'
                                 ? <SocialIcon
                                     href={data.social.twitter}
                                     target="_blank"
@@ -203,7 +206,7 @@ const MemberCard = ({ data, handleAction, setMessage }) => {
                                 </SocialIcon> : ''
                         }
                         {
-                            linkedIn
+                            linkedIn !== '0'
                                 ? <SocialIcon
                                     href={data.social.linkedIn}
                                     target="_blank"

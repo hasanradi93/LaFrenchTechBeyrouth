@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { darkGray, darkRed, lightGray, white } from "../../../services/colors"
 import { MainHeading1, Section } from '../../../services/globalStyles'
 
-export const ProfileAdminSection = styled(Section)`
+export const CompanyAdminSection = styled(Section)`
     width:80% !important;
     margin-left:auto;
     margin-right:auto;
@@ -17,7 +17,7 @@ export const TitlePage = styled(MainHeading1)`
 `
 export const SectionDataDiv = styled(motion.div)`
     width:100%;
-    height:${({ height }) => (height ? height : '250px')};
+    height:${({ height }) => (height ? height : 'auto')};
     z-index:${({ zIndex }) => (zIndex ? zIndex : '1')};
     margin-bottom:25px;
     margin-top:25px;
@@ -38,7 +38,7 @@ export const SectionDataDiv = styled(motion.div)`
 `
 export const SetDataDiv = styled(motion.div)`
     width:100%;
-    height:60px;
+    height:auto;
     margin-top:10px;
     padding:5px 15px;
     margin-bottom:5px;
@@ -51,7 +51,7 @@ export const DivTwoSide = styled.div`
     display: flex;
     flex-wrap: wrap;
 	width:100%;
-	height:25px;
+	height:40px;
 	margin-top:${(marginTop) => (marginTop ? marginTop : 'auto')}
     align-content: space-between;
     justify-content: space-between;
@@ -61,7 +61,7 @@ export const SpanSideCard = styled.span`
 	float:left;
 	margin-left:auto;
 	margin-right:auto;
-    height:36px;
+    height:35px;
 	cursor:pointer;
 	text-align:center;
 	&:hover{
@@ -73,10 +73,10 @@ export const SpanSideCard = styled.span`
     }
 `
 export const InputBox = styled.input`
-	width:${({ width }) => (width ? width : '200px')};
-    height:${({ height }) => (height ? height : '25px')};
-    background:${({ background }) => (background ? background : lightGray)};
-    color:${({ color }) => (color ? color : white)};
+	width:${({ width }) => (width ? width : '300px')};
+    height:${({ height }) => (height ? height : '35px')};
+    background:${({ background }) => (background ? background : 'transparent')};
+    color:${({ color }) => (color ? color : lightGray)};
 	outline:none;
 	box-shadow:none;
 	border-top-style: hidden;
@@ -85,7 +85,7 @@ export const InputBox = styled.input`
 	border-bottom-style: groove;
 	border-bottom-color:${white};
 	&::placeholder{
-		background:${({ placeholderColor }) => (placeholderColor ? placeholderColor : lightGray)};
+		background:${({ placeholderColor }) => (placeholderColor ? placeholderColor : 'transparent')};
 	}
 	&:hover{
         color:${darkRed};

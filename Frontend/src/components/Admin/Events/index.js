@@ -68,7 +68,6 @@ const EventsAdmin = ({ titlePage, titlePageSize }) => {//1234!@wW
                 setEvents(events)
             })
             .catch(error => {
-                console.log("edit event error", error)
                 setMessage(error.response.data.error)
             })
         let intervalData = setInterval(() => {

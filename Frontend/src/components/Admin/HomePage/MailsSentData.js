@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import backend from '../../../services/ConnectWithBackend'
 import ErrorNotice from '../../ErrorNotice'
-import { MailsTable, SetDataDiv } from './HomePageStyles'
+import { MailsTable, SetDataDiv, SecondHeadingEdited } from './HomePageStyles'
 import MailCard from './MailCard'
 
 const MailsSentData = () => {
@@ -9,30 +9,31 @@ const MailsSentData = () => {
     const [messageMini, setMessageMini] = useState(undefined)
     useEffect(() => {
         backend
-            .mailsData('LaFrenchTechToken')
-            .then(response => {
-                setMailsData(response.data.data)
-                console.log("response.data.data", response.data.data)
-            })
-            .catch(error => {
-                console.log("error.response.data.error", error.response.data.error)
-                setMessageMini(error.response.data.error)
-            })
+            .getMailsData('LaFrenchTechToken')
+            .then(response => setMailsData(response.data.data))
+            .catch(error => setMessageMini(error.response.data.error))
     }, [])
     return (
-        <SetDataDiv>
+        <SetDataDiv height={'height'}>
             {
                 mailsData.length
                     ?
-                    <MailsTable>
-                        {
-                            mailsData.map((mail, index) => (<MailCard key={index} data={mail} setMessageMini={setMessageMini} />))
-                        }
-                    </MailsTable>
+                    <>
+                        <SecondHeadingEdited
+                            fontSize={'1.5rem'}
+                        >
+                            Schedule  for last Reminders Sent
+                        </SecondHeadingEdited>
+                        <MailsTable>
+                            {
+                                mailsData.map((mail, index) => (<MailCard key={index} data={mail} setMessageMini={setMessageMini} />))
+                            }
+                        </MailsTable>
+                    </>
                     :
                     <>
                         <img src={process.env.PUBLIC_URL + '/assets/images/loadingTirangles.gif'} alt='loading' width='32px' height='32px' />
-                        <h3>No members</h3>
+                        <h3>No mails sent</h3>
                     </>
             }
             {

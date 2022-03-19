@@ -40,7 +40,7 @@ const StartUps = () => {
     }, [inView, animation])
 
     return (
-        <StartUpsSection>
+        <StartUpsSection style={{ marginTop: '-10px' }}>
             <Container
                 padding={'15px'}
             >

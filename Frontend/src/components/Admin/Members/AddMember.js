@@ -12,7 +12,7 @@ import {
 } from './MembersStyles'
 import { isValidURL } from '../../../services/FunctionsAndTools'
 import ErrorNotice from '../../ErrorNotice'
-const AddMember = ({ setMessage, handleAction, setBtnPressed, btnPressed }) => {
+const AddMember = ({ setMessage, handleAction }) => {
     const [photo, setPhoto] = useState(null)
     const [fName, setFName] = useState(null)
     const [lName, setLName] = useState(null)
@@ -43,26 +43,20 @@ const AddMember = ({ setMessage, handleAction, setBtnPressed, btnPressed }) => {
             setMessageMini('Please select a photo for memebr!')
         }
         else {
-            console.log("test-2", btnPressed)
-            if (!btnPressed) {
-                console.log("test-1", btnPressed)
-                let social = {}
-                if (facebook !== '0')
-                    social["facebook"] = facebook
-                if (twitter !== '0')
-                    social["twitter"] = twitter
-                if (linkedIn !== '0')
-                    social["linkedIn"] = linkedIn
-                console.log("social", social)
-                const newMember = new FormData()
-                newMember.append("fName", fName)
-                newMember.append("lName", lName)
-                newMember.append("position", position)
-                newMember.append("social", JSON.stringify(social))
-                newMember.append('photo', photo)
-                setBtnPressed(true)
-                handleAction(newMember, 'ADD')
-            }
+            let social = {}
+            if (facebook !== '0')
+                social["facebook"] = facebook
+            if (twitter !== '0')
+                social["twitter"] = twitter
+            if (linkedIn !== '0')
+                social["linkedIn"] = linkedIn
+            const newMember = new FormData()
+            newMember.append("fName", fName)
+            newMember.append("lName", lName)
+            newMember.append("position", position)
+            newMember.append("social", JSON.stringify(social))
+            newMember.append('photo', photo)
+            handleAction(newMember, 'ADD')
         }
     }
     return (

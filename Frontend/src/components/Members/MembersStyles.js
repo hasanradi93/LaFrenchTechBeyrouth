@@ -4,7 +4,8 @@ import { darkGray, lightGray, white, darkRed } from "../../services/colors";
 import { Section } from "../../services/globalStyles";
 export const MembersSection = styled(Section)`
     width:100%;
-    height:115vh;
+    height:160vh;
+    overflow: auto;
     position: relative;
     background: linear-gradient(to bottom right, ${white} 0%, ${white} 50%, ${lightGray} 50%, ${darkGray} 100%);
     @media screen and (max-width:960px){
@@ -59,7 +60,7 @@ export const SectionData = styled(Section)`
 `
 export const MemberCardWrapper = styled(motion.div)`
     width:22%;
-    height:300px;
+    height:450px;
     margin-bottom:15px;
     margin-top:15px;
     margin-left:auto;
@@ -79,7 +80,7 @@ export const MemberCardWrapper = styled(motion.div)`
 `
 export const MmeberImgWrapper = styled(motion.div)`
     width:100%;
-    height:180px;
+    height:300px;
     margin-bottom:5px;
 `
 export const MemberImg = styled(motion.img)`
@@ -118,6 +119,7 @@ export const MemberSocialMedia = styled(motion.div)`
     width:80%;
     height:35px;
     margin:auto;
+    margin-top:30px;
     margin-bottom:5px;
     display:flex;
     justify-content: space-between;

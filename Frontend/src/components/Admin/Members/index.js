@@ -23,24 +23,18 @@ const MembersAdmin = ({ message, setMessage, initialMembers, titlePage, titlePag
                 membersState = initialMembers
                 return membersState
             case "ADD":
-                console.log("test0", btnPressed)
-                if (btnPressed) {
-                    console.log("test", btnPressed)
-                    addNewMember(action.theMember)
-                    const theNewMember = {
-                        "id": 1,
-                        "fName": action.theMember.get('fName'),
-                        "lName": action.theMember.get('lName'),
-                        "photo": action.theMember.get('photo'),
-                        "position": action.theMember.get('position'),
-                        "social": JSON.parse(action.theMember.get('social'))
-                    }
-                    membersState.push(theNewMember)
+                const theNewMember = {
+                    "id": 1,
+                    "fName": action.theMember.get('fName'),
+                    "lName": action.theMember.get('lName'),
+                    "photo": action.theMember.get('photo'),
+                    "position": action.theMember.get('position'),
+                    "social": JSON.parse(action.theMember.get('social'))
                 }
+                membersState.push(theNewMember)
                 return membersState
             case "EDIT":
                 let idEdit = action.theMember.get('id')
-                editMember(action.theMember, idEdit)
                 const theEditedMember = {
                     "id": idEdit,
                     "fName": action.theMember.get('fName'),
@@ -54,7 +48,6 @@ const MembersAdmin = ({ message, setMessage, initialMembers, titlePage, titlePag
                 return membersState
             case "DELETE":
                 let idDelete = action.theMember.id
-                deleteMember(idDelete)
                 membersState.filter(x => x.id !== idDelete)
                 return membersState
             default:
@@ -63,11 +56,10 @@ const MembersAdmin = ({ message, setMessage, initialMembers, titlePage, titlePag
     }
 
     const addNewMember = (theMember) => {
-        console.log("test1", btnPressed)
         backend
             .addMember('LaFrenchTechToken', theMember)
             .then(response => {
-                setMessage("Member added successfully, load the page")
+                setMessage("Member added successfully, reload the page")
                 setAdd(false)
             })
             .catch(error => setMessage(error.response.data.error))
@@ -76,25 +68,34 @@ const MembersAdmin = ({ message, setMessage, initialMembers, titlePage, titlePag
     const editMember = (theMember, id) => {
         backend
             .editMember('LaFrenchTechToken', theMember, id)
-            .then(response => setMessage("Memebr eidted succssfully"))
+            .then(response => setMessage("Memebr eidted succssfully, reload the page"))
             .catch(error => setMessage(error.response.data.error))
     }
 
     const deleteMember = (id) => {
         backend
             .deleteMember('LaFrenchTechToken', id)
-            .then(response => setMessage("Member successfully deleted"))
+            .then(response => setMessage("Member successfully deleted, reload the page"))
             .catch(error => setMessage(error.response.data.error))
     }
 
     const [members, dispatch] = useReducer(reducer, initialMembers)
 
     const handleAction = (member, actionName) => {
-        dispatch({ type: actionName, theMember: member });
+        if (actionName === "ADD")
+            addNewMember(member)
+        else if (actionName === "EDIT") {
+            let idEdit = member.get('id')
+            editMember(member, idEdit)
+        }
+        else if (actionName === "DELETE") {
+            let idDelete = member.id
+            deleteMember(idDelete)
+        }
+        dispatch({ type: actionName, theMember: member })
     }
 
     useEffect(() => {
-        console.log("initialMembers", initialMembers)
         handleAction(initialMembers, 'VIEW')
     }, [])
 
@@ -128,7 +129,7 @@ const MembersAdmin = ({ message, setMessage, initialMembers, titlePage, titlePag
                         ?
                         (
                             add
-                                ? <AddMember btnPressed={btnPressed} setBtnPressed={setBtnPressed} setMessage={setMessage} handleAction={handleAction} /> : ''
+                                ? <AddMember setMessage={setMessage} handleAction={handleAction} /> : ''
                         )
                         : <AddMember btnPressed={btnPressed} setBtnPressed={setBtnPressed} setMessage={setMessage} handleAction={handleAction} />
                 }

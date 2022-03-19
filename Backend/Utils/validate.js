@@ -166,13 +166,13 @@ const userValidationOtherData = (data) => {
 const userValidationUsername = (data) => {
     const schema = joi.object({
         username: joi.string().trim().alphanum().insensitive().lowercase().min(5).max(30).pattern(new RegExp(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/)).required().messages({
-            'string.base': `Username should be a type of 'text'`,
-            'string.empty': `Username cannot be an empty field`,
-            'string.lowercase': `Username must be lowercase`,
+            'string.base': `'Username' should be a type of 'text'`,
+            'string.empty': `'Username' cannot be an empty field`,
+            'string.lowercase': `'Username' must be lowercase`,
             'string.pattern.base': `Invalid username fromat`,
-            'string.min': `Username should have a minimum length of 5`,
-            'string.max': `Username should have a maximum length of 30`,
-            'any.required': `Username is a required field`
+            'string.min': `'Username' should have a minimum length of 5`,
+            'string.max': `'Username' should have a maximum length of 30`,
+            'any.required': `'Username' is a required field`
         }),
     })
     return schema.validate(data)
@@ -180,11 +180,11 @@ const userValidationUsername = (data) => {
 const userValidationEmail = (data) => {
     const schema = joi.object({
         email: joi.string().trim().min(3).max(30).required().email().messages({
-            'string.base': `Email should be a type of 'text'`,
-            'string.empty': `Email cannot be an empty field`,
-            'string.email': `Email invalid email address`,
-            'string.min': `Email should have a minimum length of 10`,
-            'any.required': `Email is a required field`
+            'string.base': `'Email' should be a type of 'text'`,
+            'string.empty': `'Email' cannot be an empty field`,
+            'string.email': `'Email' invalid email address format`,
+            'string.min': `'Email' should have a minimum length of 10`,
+            'any.required': `'Email' is a required field`
         }),
     })
     return schema.validate(data)
@@ -194,7 +194,7 @@ const userValidationPassword = (data) => {
         password: joi.string().trim().min(8).max(30).pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.!@#\$%\^&\*])(?=.{6,})")).required().messages({
             'string.base': `Password should be a type of 'text'`,
             'string.empty': `Password cannot be an empty field`,
-            'string.pattern.base': `Password should contain at least 1 lowercase, at least 1 uppercase alphabetical, at least 1 numeric, at least one special character, must be six characters or longer"`,
+            'string.pattern.base': `Strong Password should contain at least 1 lowercase, at least 1 uppercase alphabetical, at least 1 numeric, at least one special character, must be six characters or longer`,
             'string.min': `Password should have a minimum length of 8`,
             'string.max': `Password should have a maximum length of 30`,
             'any.required': `Password is a required field`

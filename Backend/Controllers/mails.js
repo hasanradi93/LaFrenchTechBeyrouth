@@ -11,14 +11,15 @@ const mailsForEvent = async (eventId, subscribers) => {
     const savedMailsSent = await newMails.save()
     console.log("savedMailsSent", savedMailsSent)
 }
-const getMailsData = async (request, response) => {
-    const mails = await Mails.find({})
-        .populate({ path: eventId, model: 'Event' })
+const getMailsData = async (request, response, next) => {
+    const mails = await Mails.find({}).limit(15)
+        .populate({ path: 'eventId', model: 'Event' })
         .populate({ path: 'subscribers', model: 'Subscriber' })
         .sort({ $natural: -1 })
         .limit(10)
+    console.log("mails", mails)
     if (!mails.length)
-        return next({ name: "Corrupted", message: `No data` })
+        return next({ name: "Corrupted", message: `No members data` })
     response.status(201).json({ data: mails })
 }
 module.exports = { mailsForEvent, getMailsData }

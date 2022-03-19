@@ -21,7 +21,7 @@ const Members = ({ pageName }) => {
             .catch(error => setError(error.response.data.error))
     }, [])
     return (
-        <MembersSection>
+        <MembersSection style={{ marginTop: '-10px' }}>
             <ContainerMembers>
                 <SectionData>
                     {

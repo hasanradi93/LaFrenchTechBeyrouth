@@ -22,7 +22,7 @@ function AuthContextProvider(props) {
                 console.log("error " + error)
                 console.log("error " + error.response.data.error)
                 setLoggedIn(false)
-                navigate('/admin/login')
+                // navigate('/admin/login')
             })
     }
 

@@ -25,6 +25,8 @@ const editCompany = async (request, response, next) => {
         email: body.email,
         phone: body.phone
     }
+    const company = await Comapny.findById(ObjectId(_id))
+    Object.assign(company, editCompany)
     const updatedCompany = await Comapny.findByIdAndUpdate(ObjectId(_id), editCompany, { new: true })
     response.status(201).json({ data: updatedCompany })
 }

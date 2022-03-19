@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import CompanyAdmin from '../../components/Admin/Company'
-import SideBar from '../../components/Admin/SideBar'
-import AuthContext from '../../services/AuthContext'
+import CompanyAdmin from '../../../components/Admin/Company'
+import SideBar from '../../../components/Admin/SideBar'
+import AuthContext from '../../../services/AuthContext'
 
 const CompanyAdminPage = () => {
     const { loggedIn } = useContext(AuthContext)
@@ -16,7 +16,7 @@ const CompanyAdminPage = () => {
                     :
                     <>
                         <SideBar menuIndex={5} />
-                        <CompanyAdmin titlePage={'Company Page'} titlePageSize={'3rem'} />
+                        <CompanyAdmin titlePage={'Settings'} titlePageSize={'3rem'} />
                     </>
             }
         </>

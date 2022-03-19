@@ -12,7 +12,8 @@ import {
     HeroSection,
     HeroVideo,
     ButtonWrapper,
-    HeroButton
+    HeroButton,
+    BannerFadeButton
 } from './HeroStyles'
 import Modal from '../Modal'
 import { useInView } from 'react-intersection-observer'
@@ -93,6 +94,7 @@ const Hero = ({ pageName }) => {
                         </ButtonWrapper>
                     </Column>
                 </Row>
+                <BannerFadeButton />
             </HeroSection>
             <Modal showModal={showModal} toggleModal={toggleModal} openedBy={'Contact'} />
         </>

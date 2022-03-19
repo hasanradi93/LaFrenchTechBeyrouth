@@ -6,9 +6,7 @@ import {
     CardColumn,
     CardRow,
     MiniTable,
-    SpanSide,
-    CardColumn,
-    CardRow
+    SpanSide
 } from './HomePageStyles'
 import { darkGray, darkRed, lightGray } from '../../../services/colors'
 
@@ -25,7 +23,7 @@ const MailCard = ({ data, nbRow }) => {
                     {formatDate(data.eventId.startDate, 'en')}
                 </CardColumn>
                 <CardColumn>
-                    {formatDate(data.createdAt, 'en')}
+                    {formatDate(data.createdAt.split('T')[0], 'en') + ' T:' + data.createdAt.split('T')[1].substring(0, 5)}
                 </CardColumn>
                 <CardColumn>
                     <SpanSide onClick={viewSubscribers ? () => setViewSubscribers(false) : () => setViewSubscribers(true)}>

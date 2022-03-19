@@ -9,14 +9,16 @@ const InitialData = () => {
     const iconStyle = (Icon) => <Icon />
     const { userInfo } = useContext(AuthContext)
     const [firstName, setFirstName] = useState(null)
-    const [lastName, setLasttName] = useState(null)
+    const [lastName, setLastName] = useState(null)
     const [messageMini, setMessageMini] = useState(undefined)
     useEffect(() => {
         setFirstName(userInfo.firstName)
-        setLasttName(userInfo.lastName)
+        setLastName(userInfo.lastName)
     }, [])
 
     const updateData = () => {
+        console.log("firstName", firstName)
+        console.log("lastName", lastName)
         if (firstName && lastName) {
             const data = { "fName": firstName, "lName": lastName, "userType": 1 }
             backend
@@ -39,12 +41,12 @@ const InitialData = () => {
         <SetDataDiv>
             <DivTwoSide>
                 <SpanSideCard>
-                    <InputBox type='text' placeholder='Enter the first name' value={firstName} onChange={(e) => setFirstName(e.targetvalue)} />
+                    <InputBox type='text' placeholder='Enter the first name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                 </SpanSideCard>
             </DivTwoSide>
             <DivTwoSide>
                 <SpanSideCard>
-                    <InputBox type='text' placeholder='Enter the last name' value={lastName} onChange={(e) => setLasttName(e.targetvalue)} />
+                    <InputBox type='text' placeholder='Enter the last name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
                 </SpanSideCard>
             </DivTwoSide>
             <DivTwoSide>

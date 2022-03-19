@@ -16,7 +16,7 @@ const SubscribersAdminPage = () => {
                     :
                     <>
                         <SideBar menuIndex={3} />
-                        <SubscribersAdmin titlePage={'Subscribers Page'} titlePageSize={'3rem'} />
+                        <SubscribersAdmin titlePage={'Subscribers'} titlePageSize={'3rem'} />
                     </>
             }
         </>

@@ -7,11 +7,11 @@ const HomePageAdmin = ({ fullName, titlePage, titlePageSize }) => {
     return (
         <HomePageSection>
             <TitlePage fontSize={titlePageSize}>{titlePage}</TitlePage>
-            <SectionDataDiv>
+            <SectionDataDiv height={'auto'}>
                 <MailsSentData />
             </SectionDataDiv>
             <Line />
-            <SectionDataDiv>
+            <SectionDataDiv height={'auto'}>
                 <DataChart />
             </SectionDataDiv>
         </HomePageSection>

@@ -218,12 +218,12 @@ const EventModalAdmin = ({ data, handleAction }) => {//1234!@wW
                             <tr>
                                 <td>Start in</td>
                                 <td><InputBox type='datetime-local' value={startDate} onChange={(e) => setStartDate(e.target.value)} /></td>
-                                <td>{typeAction === 'Edit' ? (formatDate(data.startDate, 'en') + ' T' + data.startDate.split('T')[1].substring(0, 5)) : ((formatDate(startDate, 'en') !== 'undefined, NaN undefined NaN') ? (formatDate(startDate, 'en') + ' T' + startDate.split('T')[1]) : '')}</td>
+                                <td>{typeAction === 'Edit' ? (formatDate(data.startDate, 'en') + ' | ' + data.startDate.split('T')[1].substring(0, 5)) : ((formatDate(startDate, 'en') !== 'undefined, NaN undefined NaN') ? (formatDate(startDate, 'en') + ' | ' + startDate.split('T')[1]) : '')}</td>
                             </tr>
                             <tr>
                                 <td>End in</td>
                                 <td><InputBox type='datetime-local' value={endDate} onChange={(e) => setEndDate(e.target.value)} /></td>
-                                <td>{typeAction === 'Edit' ? (formatDate(data.endDate, 'en') + ' T' + data.endDate.split('T')[1].substring(0, 5)) : ((formatDate(endDate, 'en') !== 'undefined, NaN undefined NaN') ? (formatDate(endDate, 'en') + ' T' + endDate.split('T')[1]) : '')}</td>
+                                <td>{typeAction === 'Edit' ? (formatDate(data.endDate, 'en') + ' | ' + data.endDate.split('T')[1].substring(0, 5)) : ((formatDate(endDate, 'en') !== 'undefined, NaN undefined NaN') ? (formatDate(endDate, 'en') + ' | ' + endDate.split('T')[1]) : '')}</td>
                             </tr>
                         </tbody>
                     </TableDates>

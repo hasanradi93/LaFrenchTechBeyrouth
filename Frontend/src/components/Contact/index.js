@@ -8,7 +8,7 @@ import FAQ from './FAQ'
 const Contact = ({ pageName }) => {
     return (
         <>
-            <Parallax className='image' blur={0} bgImage={''} strength={2000} bgImageStyle={{ minHeight: "100vh", marginTop: '-3px' }}>
+            <Parallax className='image' blur={0} bgImage={''} strength={2000} bgImageStyle={{ minHeight: "100vh", marginTop: '-10px' }} style={{ marginTop: '-10px' }}>
                 <TitlesAndSubTitles pageName={pageName} index={3} mt={'0px'} mb={'0px'} width={'100%'} bC={lightGray} colorMainTitle={darkGray} opacity={1} zIndex={9} heightDesktop={'26vh'} heightMobile={'28vh'} />
             </Parallax>
             <Parallax className='image' blur={0} bgImage={''} strength={-200} bgImageStyle={{ minHeight: "100vh" }}>

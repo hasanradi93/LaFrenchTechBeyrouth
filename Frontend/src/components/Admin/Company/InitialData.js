@@ -1,13 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
-import AuthContext from '../../../services/AuthContext'
-import { ButtonInCard, DivTwoSide, InputBox, SetDataDiv, SpanSideCard } from './ProfileStyles'
+import React, { useEffect, useState } from 'react'
+import {
+    ButtonInCard,
+    DivTwoSide,
+    InputBox,
+    SetDataDiv,
+    SpanSideCard
+} from './CompanyStyles'
 import { FaSave } from 'react-icons/fa'
 import backend from '../../../services/ConnectWithBackend'
 import ErrorNotice from '../../ErrorNotice'
 
 const InitialData = () => {
     const iconStyle = (Icon) => <Icon />
-    const { userInfo } = useContext(AuthContext)
     const [companyId, setCompanyId] = useState(null)
     const [companyEmail, setCompanyEmail] = useState(null)
     const [companyPhone, setCompanyPhone] = useState(null)
@@ -16,15 +20,11 @@ const InitialData = () => {
         backend
             .getCompanyDataAdmin('LaFrenchTechToken')
             .then(response => {
-                console.log("response.data.data", response.data.data)
-                setCompanyId(response.data.data.id)
-                setCompanyEmail(response.data.data.email)
-                setCompanyPhone(response.data.data.phone)
+                setCompanyId(response.data.data[0].id)
+                setCompanyEmail(response.data.data[0].email)
+                setCompanyPhone(response.data.data[0].phone)
             })
-            .catch(error => {
-                console.log("error.response.data.error", error.response.data.error)
-                setMessageMini(error.response.data.error)
-            })
+            .catch(error => setMessageMini(error.response.data.error))
     }, [])
 
     const updateData = () => {
@@ -32,14 +32,8 @@ const InitialData = () => {
             const data = { "phone": companyPhone, "email": companyEmail }
             backend
                 .editCompanyDataAdmin('LaFrenchTechToken', data, companyId)
-                .then(response => {
-                    console.log("response.data.data", response.data.data)
-                    setMessageMini("Company data updated successfully")
-                })
-                .catch(error => {
-                    console.log("error.response.data.error", error.response.data.error)
-                    setMessageMini(error.response.data.error)
-                })
+                .then(response => setMessageMini("Company data updated successfully"))
+                .catch(error => setMessageMini(error.response.data.error))
         }
         else {
             setMessageMini('Please fill the data')
@@ -50,12 +44,12 @@ const InitialData = () => {
         <SetDataDiv>
             <DivTwoSide>
                 <SpanSideCard>
-                    <InputBox type='text' placeholder='Enter the company email' value={companyEmail} onChange={(e) => setCompanyEmail(e.targetvalue)} />
+                    <InputBox type='text' placeholder='Enter the company email' value={companyEmail} onChange={(e) => setCompanyEmail(e.target.value)} />
                 </SpanSideCard>
             </DivTwoSide>
             <DivTwoSide>
                 <SpanSideCard>
-                    <InputBox type='text' placeholder='Enter the company phone' value={companyPhone} onChange={(e) => setCompanyPhone(e.targetvalue)} />
+                    <InputBox type='text' placeholder='Enter the company phone' value={companyPhone} onChange={(e) => setCompanyPhone(e.target.value)} />
                 </SpanSideCard>
             </DivTwoSide>
             <DivTwoSide>

@@ -47,10 +47,10 @@ const checkIfStillLogin = async (request, response, next) => {
 }
 const userLogout = async (request, response) => {
     logger.info("--------BEFORE DELETE COOKIE | RESPONSE--------")
-    logger.info(response)
+    // logger.info(response)
     logger.info("--------BEFORE DELETE COOKIE | REQUEST--------")
-    logger.info(request)
-    response.clearCookie('User_LoggedIn')
+    // logger.info(request)
+    //response.clearCookie('User_LoggedIn')
     response.status(201).end()
 }
 module.exports = { userLogin, userLogout, checkIfStillLogin }

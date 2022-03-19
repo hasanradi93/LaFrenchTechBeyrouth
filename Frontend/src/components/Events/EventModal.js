@@ -10,7 +10,8 @@ import {
     , EventCardAddress
     , EventCardDetails
     , EventCardSubscribe
-    , EventCardlocation
+    , EventCardlocation,
+    EventCardShare
 } from './EventsStyles'
 import DOMPurify from 'dompurify'
 import { TextWrapper } from '../../services/globalStyles'
@@ -18,6 +19,12 @@ import { darkGray, darkRed } from '../../services/colors'
 import CarouselPhotos from '../CarouselPhotos'
 import GoogleMapBox from '../GoogleMapBox'
 import BoxSubscriber from './BoxSubscriber'
+import {
+    FacebookShareButton,
+    TwitterShareButton,
+    WhatsappShareButton
+} from "react-share"
+import { FacebookIcon, TwitterIcon, WhatsappIcon } from "react-share"
 const EventModal = ({ data, pageName }) => {
     const { t } = useTranslation()
     const language = cookies.get('i18next') || 'en'
@@ -74,6 +81,35 @@ const EventModal = ({ data, pageName }) => {
                         <EventCardSubscribe>
                             <BoxSubscriber id={data.id} />
                         </EventCardSubscribe>
+                        <EventCardShare>
+                            <FacebookShareButton
+                                url={"https://lafrenchtechbeiyrouth.org/events"}
+                                quote={"La French Tech Beyrouth Event: " + data.title}
+                                hashtag={"#events #lafrenchtech #beirut"}
+                                description={data.title}
+                                className="Demo__share-button"
+                            >
+                                <FacebookIcon size={32} round />
+                            </FacebookShareButton>
+                            <TwitterShareButton
+                                url={"https://lafrenchtechbeiyrouth.org/events"}
+                                quote={"La French Tech Beyrouth Event: " + data.title}
+                                hashtag={"#events #lafrenchtech #beirut"}
+                                description={data.title}
+                                className="Demo__share-button"
+                            >
+                                <TwitterIcon size={32} round />
+                            </TwitterShareButton>
+                            <WhatsappShareButton
+                                url={"https://lafrenchtechbeiyrouth.org/events"}
+                                quote={"La French Tech Beyrouth Event: " + data.title}
+                                hashtag={"#events #lafrenchtech #beirut"}
+                                description={data.title}
+                                className="Demo__share-button"
+                            >
+                                <WhatsappIcon size={32} round />
+                            </WhatsappShareButton>
+                        </EventCardShare>
                         <EventCardlocation>
                             <GoogleMapBox X={data.location.X} Y={data.location.Y} />
                         </EventCardlocation>

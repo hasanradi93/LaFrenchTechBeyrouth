@@ -8,7 +8,7 @@ import ErrorNotice from '../../ErrorNotice'
 const EmailData = () => {
     const iconStyle = (Icon) => <Icon />
     const [edit, setEdit] = useState(false)
-    const { userInfo } = useContext(AuthContext)
+    const { userInfo, checkLoggedIn } = useContext(AuthContext)
     const [oldEmail, setOldEmail] = useState(null)
     const [newEmail, setNewEmail] = useState(null)
     const [password, setPassword] = useState(null)
@@ -16,21 +16,24 @@ const EmailData = () => {
 
     const updateData = () => {
         if (oldEmail && newEmail && password) {
-            if (oldEmail === userInfo.email) {
-                setMessageMini('Please fill the valid old email')
+            if (oldEmail !== userInfo.email) {
+                setMessageMini('Please fill the valid old Email')
             }
             else {
                 const data = { "email": newEmail, "password": password }
                 backend
                     .editEmailDataAdmin('LaFrenchTechToken', data, userInfo.id)
                     .then(response => {
-                        console.log("response.data.data", response.data.data)
                         setMessageMini("Email updated successfully")
+                        if (response.status === 201) {
+                            let intervalReload = setInterval(() => {
+                                backend.logout('LaFrenchTechToken')
+                                checkLoggedIn()
+                                clearInterval(intervalReload)
+                            }, 5000)
+                        }
                     })
-                    .catch(error => {
-                        console.log("error.response.data.error", error.response.data.error)
-                        setMessageMini(error.response.data.error)
-                    })
+                    .catch(error => setMessageMini(error.response.data.error))
             }
         }
         else {
@@ -46,17 +49,17 @@ const EmailData = () => {
                     <>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter your old email' value={oldEmail} onChange={(e) => setOldEmail(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter your old email' value={oldEmail} onChange={(e) => setOldEmail(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter the new email' value={newEmail} onChange={(e) => setNewEmail(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter the new email' value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>

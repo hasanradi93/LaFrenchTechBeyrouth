@@ -1,57 +1,63 @@
 import React, { useEffect, useState } from 'react'
 import backend from '../../../services/ConnectWithBackend'
 import ErrorNotice from '../../ErrorNotice'
-import { SetDataDiv } from './HomePageStyles'
-import { Doughnut } from 'react-chartjs-2'
-import { darkGray, darkRed, lightGray } from '../../../services/colors'
+import { SetDataDiv, SecondHeadingEdited } from './HomePageStyles'
+import 'chart.js/auto'
+import { Chart } from 'react-chartjs-2'
+import { darkRed, lightGray, lightRed,white } from '../../../services/colors'
 
 const DataChart = () => {
     const [data, setData] = useState(undefined)
     const [messageMini, setMessageMini] = useState(undefined)
     useEffect(() => {
         backend
-            .getForAdmin()
+            .getForChart('LaFrenchTechToken')
             .then(response => {
                 const events = response.data.data
-                console.log("events", events)
+                let labels = []
+                let subscribers = []
+                let colors = []
+                let i = 0
+                events.forEach(event => {
+                    labels.push(event.title)
+                    subscribers.push(event.subscribers.length)
+                    if (i % 2 === 0)
+                        colors.push(darkRed)
+                    else
+                        colors.push(lightRed)
+                    i++
+                });
                 const dataChart = {
-                    labels: [
-                        events[0].title,
-                        events[1].title,
-                        events[2].title
-                    ],
+                    labels: labels,
                     datasets: [{
-                        label: 'My First Dataset',
-                        data: [
-                            events[0].subscribers.length,
-                            events[1].subscribers.length,
-                            events[2].subscribers.length
-                        ],
-                        backgroundColor: [
-                            lightGray,
-                            darkGray,
-                            darkRed
-                        ],
+                        label: 'Number of Subscribers/Event',
+                        data: subscribers,
+                        backgroundColor: colors,
                         hoverOffset: 4
                     }]
                 }
                 setData(dataChart)
             })
-            .catch(error => {
-                console.log("error data chart", error.response.data.error)
-                setMessageMini(error.response.data.error)
-            })
+            .catch(error => setMessageMini(error.response.data.error))
     }, [])
     return (
-        <SetDataDiv>
+        <SetDataDiv height={'height'} mb={'100px'} background={lightGray}>
             {
-                data.length
+                data
                     ?
-                    <Doughnut data={data} />
+                    <>
+                        <SecondHeadingEdited
+                            fontSize={'1.5rem'}
+                            color={white}
+                        >
+                            Line Chart: Count of Subscribers/Event
+                        </SecondHeadingEdited>
+                        <Chart type='line' data={data} />
+                    </>
                     :
                     <>
                         <img src={process.env.PUBLIC_URL + '/assets/images/loadingTirangles.gif'} alt='loading' width='32px' height='32px' />
-                        <h3>No data</h3>
+                        <h3>No data events</h3>
                     </>
             }
             {

@@ -2,6 +2,9 @@ const nodemailer = require('nodemailer')
 const nodemailerMailgun = require('nodemailer-mailgun-transport')
 const cron = require('node-cron')
 const moment = require('moment-timezone')
+const { ObjectId } = require('mongodb')
+require('../Models/connectToDB')
+const Subscriber = require('../Models/subscriber')
 const getSubscribers = require('../Controllers/subscriber')
 const getEmailCompany = require('../Controllers/company')
 const saveMailsSent = require('../Controllers/mails')
@@ -25,7 +28,9 @@ const monthsNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ]
 const getEmailsSubscribers = async (eventId) => {
-    const subscribers = await getSubscribers.getSubscribersForEvent(eventId)
+    console.log("imready eventId", eventId)
+    const subscribers = await getSubscribers.getSubscribersForEvent(evenId)
+    console.log("subscribers", subscribers)
     let emails = ''
     subscribers.forEach(element => {
         emails ? emails = emails + "," + element.email
@@ -56,22 +61,36 @@ const sendAMailEvent = async (event) => {
         cron.schedule(datesToSend[i].toString(), async () => {
             logger.info(`-------- Preparation for sending a mail: ${datesToSend[i]} --------`)
             logger.info("event.id", event.id)
-            let subscribersMails = await getEmailsSubscribers(event.id)
-            logger.info("subscribersMails", subscribersMails)
+            // let subscribersMails = await getEmailsSubscribers(event.id)
+            // logger.info("subscribersMails", subscribersMails)
+            const subscribers = await Subscriber.find({ events: ObjectId(event.id) })
+            console.log("subscribersGET", subscribers)
+
+            let emails = ''
+            let subscribersId = []
+            subscribers.forEach(element => {
+                emails ? emails = emails + "," + element.email
+                    : emails = element.email
+            })
+            subscribers.forEach(element => {
+                subscribersId.push(element.id)
+            })
+            logger.info("emails", emails)
+            let subscribersMails = emails
             const emailCompany = await getEmailCompany.companyMail()
             let mailOptions = {
                 from: emailCompany,
-                to: subscribersMails,
+                to: `${subscribersMails}`,
                 subject: `Reminder: for the event ${event.title}`,
                 text: `${event.description}`,
                 html: `${event.description}`
             }
-            transporter.sendMail(mailOptions, function (error, info) {
+            transporterByMyMail.sendMail(mailOptions, function (error, info) {
                 if (error)
                     logger.error("ERROR sending mail", error)
                 else {
                     logger.info("Succesfully sending mail to subscribers", info)
-                    saveMailsSent.mailsForEvent(event.id, subscribersMails)
+                    saveMailsSent.mailsForEvent(event.id, subscribersId)
                 }
 
             })
@@ -89,7 +108,7 @@ const sendAMailContact = async (data) => {
         text: messageContent,
         html: messageContent
     }
-    transporterByMyMail.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(mailOptions, function (error, info) {
         if (error)
             logger.error("ERROR sending mail", error)
         else

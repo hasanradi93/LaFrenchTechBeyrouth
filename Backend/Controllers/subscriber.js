@@ -31,7 +31,9 @@ const searchSubscribers = async (request, response, next) => {
         return next({ name: "Oops", message: `No subscriber found` })
 }
 const getSubscribersForEvent = async (eventId) => {
+    console.log("eventIdGet", eventId)
     const subscribers = await Subscriber.find({ events: ObjectId(eventId) })
+    console.log("subscribersGET", subscribers)
     if (!subscribers)
         return false
     return subscribers
@@ -109,4 +111,4 @@ const unscribeToEvent = async (request, response, next) => {
         return next({ name: "ValidationError", message: 'Email data not removed' })
     response.status(201).json({ data: R2 })
 }
-module.exports = { getSubscribers, searchSubscribers, subscribeToEvent, unscribeToEvent, getSubscribersForEvent }
+module.exports = { getSubscribersForEvent, getSubscribers, searchSubscribers, subscribeToEvent, unscribeToEvent }

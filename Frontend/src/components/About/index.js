@@ -11,7 +11,7 @@ const About = () => {
     },[])
     return (
         <>
-            <Parallax className='image' blur={0} bgImage={''} strength={500} bgImageStyle={{ minHeight: "100vh" }}>
+            <Parallax className='image' blur={0} bgImage={''} strength={500} bgImageStyle={{ minHeight: "100vh" }} style={{ marginTop: '-10px' }}>
                 <Content  {...contentOne} contentIndex={0} pageName="About" />
             </Parallax>
             <Parallax className='image' blur={0} bgImage={''} strength={800} bgImageStyle={{ minHeight: "100vh" }}>

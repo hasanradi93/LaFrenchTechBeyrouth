@@ -8,7 +8,7 @@ import ErrorNotice from '../../ErrorNotice'
 const PasswordData = () => {
     const iconStyle = (Icon) => <Icon />
     const [edit, setEdit] = useState(false)
-    const { userInfo } = useContext(AuthContext)
+    const { userInfo, checkLoggedIn } = useContext(AuthContext)
     const [oldPassword, setOldPassword] = useState(null)
     const [newPassword, setNewPassword] = useState(null)
     const [messageMini, setMessageMini] = useState(undefined)
@@ -19,13 +19,16 @@ const PasswordData = () => {
             backend
                 .editPasswordDataAdmin('LaFrenchTechToken', data, userInfo.id)
                 .then(response => {
-                    console.log("response.data.data", response.data.data)
                     setMessageMini("Password updated successfully")
+                    if (response.status === 201) {
+                        let intervalReload = setInterval(() => {
+                            backend.logout('LaFrenchTechToken')
+                            checkLoggedIn()
+                            clearInterval(intervalReload)
+                        }, 5000)
+                    }
                 })
-                .catch(error => {
-                    console.log("error.response.data.error", error.response.data.error)
-                    setMessageMini(error.response.data.error)
-                })
+                .catch(error => setMessageMini(error.response.data.error))
         }
         else {
             setMessageMini('Please fill the data')
@@ -40,12 +43,12 @@ const PasswordData = () => {
                     <>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter your old password' value={oldPassword} onChange={(e) => setOldPassword(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter your old password' value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter the new password' value={newPassword} onChange={(e) => setNewPassword(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter the new password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>

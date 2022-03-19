@@ -13,9 +13,10 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
-    const initial = { opacity: 0, y: 30 };
-    const transition = { delay: 0.3, duration: 0.6 };
-    const animation = useAnimation();
+    const [pressed, setPressed] = useState(false)
+    const initial = { opacity: 0, y: 30 }
+    const transition = { delay: 0.3, duration: 0.6 }
+    const animation = useAnimation()
     const navigate = useNavigate()
     const { ref, inView } = useInView({ threshold: 0.2 });
     const { loggedIn, checkLoggedIn } = useContext(AuthContext)
@@ -81,7 +82,8 @@ const Login = () => {
         <>
             {
                 !loggedIn
-                    ? <LoginSection>
+                    ?
+                    <LoginSection>
                         < RowForm ref={ref} variants={messageVariants} >
                             <ColumnForm>
                                 <FormTitle
@@ -111,7 +113,9 @@ const Login = () => {
                                         </FormInputRow>
                                     ))}
                                     <RowForm>
-                                        <FormButton type="submit" inverse={false}>Login</FormButton>
+                                        {
+                                            !success ? <FormButton type="submit" inverse={false}>Login</FormButton> : ''
+                                        }
                                     </RowForm>
 
                                 </FormWrapper>

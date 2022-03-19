@@ -25,6 +25,15 @@ const getEventsAvailableAdmin = async (request, response, next) => {
         .sort({ $natural: -1 })
     response.status(201).json({ data: events })
 }
+const getEventsChart = async (request, response, next) => {
+    if (request.user === undefined)
+        return next({ name: "UnAuthorizedError", message: `You don't have credentials` })
+    const events = await Event.find({ 'deleted.status': false, endDate: { $gte: new Date().toISOString().substring(0, 10) } })
+        .populate({ path: 'subscribers', model: 'Subscriber' })
+        .sort({ $natural: -1 })
+        .limit(10)
+    response.status(201).json({ data: events })
+}
 const daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate()
 }
@@ -214,4 +223,4 @@ const deleteEvent = async (request, response, next) => {
         return next({ name: "CastError", message: `Error happening!, Event not deleted` })
     response.status(204).end()
 }
-module.exports = { getLatestEventsVisitor, getEventsAvailableVisitor, getEventsAvailableAdmin, getEventsSearch, uploadPhotosEvent, setEvent, editEvent, deletePhotoEvent, deleteEvent }
+module.exports = { getLatestEventsVisitor, getEventsAvailableVisitor, getEventsAvailableAdmin, getEventsChart, getEventsSearch, uploadPhotosEvent, setEvent, editEvent, deletePhotoEvent, deleteEvent }

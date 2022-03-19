@@ -53,7 +53,7 @@ export const EventCardInfo = styled.div`
 	width: 280px;
 	text-decoration: none;
 	border-radius: 4px;
-	height: 100vh;
+	height: 85vh;
 
 	display: flex;
 	flex-direction: column;
@@ -147,6 +147,26 @@ export const EventCardDetails = styled.div`
 	display: flex;
 	flex-direction: column;
 	color: ${lightGray};
+`
+export const EventCardShare = styled.div`
+	width:200px;
+	height:50px;
+	margin-top:5px;
+	margin-left:auto;
+	margin-right:auto;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	transition:all 1s ease-in;
+	>button{
+		margin-left:5px;
+		margin-right:5px;
+	}
+	>button:hover{
+		opacitry:0.7 !important;
+		border-radius:50%;
+		border:1px solid ${darkRed} !important;
+	}
 `
 export const NoEvent = styled.h1`
 	color:${({ color }) => (color ? color : 'white')};

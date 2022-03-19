@@ -17,7 +17,7 @@ const EventsAdminPage = () => {
                     :
                     <>
                         <SideBar menuIndex={1} />
-                        <EventsAdmin titlePage={'Events Page'} titlePageSize={'3rem'} />
+                        <EventsAdmin titlePage={'Events'} titlePageSize={'3rem'} />
                     </>
             }
         </>

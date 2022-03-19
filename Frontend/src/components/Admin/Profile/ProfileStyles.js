@@ -22,7 +22,7 @@ export const TitlePage = styled(MainHeading1)`
 `
 export const SectionDataDiv = styled(motion.div)`
     width:100%;
-    height:${({ height }) => (height ? height : '250px')};
+    height:${({ height }) => (height ? height : 'auto')};
     z-index:${({ zIndex }) => (zIndex ? zIndex : '1')};
     margin-bottom:25px;
     margin-top:25px;
@@ -43,9 +43,9 @@ export const SectionDataDiv = styled(motion.div)`
 `
 export const SetDataDiv = styled(motion.div)`
     width:100%;
-    height:60px;
+    height:auto;
     margin-top:10px;
-    padding:5px 15px;
+    padding:25px 15px;
     margin-bottom:5px;
     font-weight:600;
     font-weight:bold;
@@ -56,7 +56,7 @@ export const DivTwoSide = styled.div`
     display: flex;
     flex-wrap: wrap;
 	width:100%;
-	height:25px;
+	height:40px;
 	margin-top:${(marginTop) => (marginTop ? marginTop : 'auto')}
     align-content: space-between;
     justify-content: space-between;
@@ -66,7 +66,7 @@ export const SpanSideCard = styled.span`
 	float:left;
 	margin-left:auto;
 	margin-right:auto;
-    height:36px;
+    height:35px;
 	cursor:pointer;
 	text-align:center;
 	&:hover{
@@ -78,11 +78,13 @@ export const SpanSideCard = styled.span`
     }
 `
 export const InputBox = styled.input`
-	width:${({ width }) => (width ? width : '200px')};
-    height:${({ height }) => (height ? height : '25px')};
-    background:${({ background }) => (background ? background : lightGray)};
-    color:${({ color }) => (color ? color : white)};
+	width:${({ width }) => (width ? width : '300px')};
+    height:${({ height }) => (height ? height : '35px')};
+    background:${({ background }) => (background ? background : 'transparent')};
+    color:${({ color }) => (color ? color : lightGray)};
 	outline:none;
+    padding:10px;
+    margin-bottom:15px;
 	box-shadow:none;
 	border-top-style: hidden;
 	border-right-style: hidden;
@@ -109,7 +111,7 @@ export const ButtonInCard = styled.a`
 	height:25px;
 	text-align:center;
 	paddin-bottm:2px;
-    margin-top:-5px;
+    margin-top:15px;
     &:hover{
         color:${darkRed};
 		background-color:${darkGray};

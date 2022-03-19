@@ -9,7 +9,7 @@ const EventsWallpaperPage = ({ pageName }) => {
     }, [])
     return (
         <>
-            <Parallax className='image' blur={0} bgImage={''} strength={2000} bgImageStyle={{ minHeight: "100vh" }}>
+            <Parallax className='image' blur={0} bgImage={''} strength={2000} bgImageStyle={{ minHeight: "100vh" }} style={{ marginTop: '-10px' }}>
                 <TitlesAndSubTitles pageName={pageName} index={1} mt={'0px'} mb={'0px'} width={'100%'} bC={lightGray} colorMainTitle={darkGray} opacity={1} zIndex={9} heightDesktop={'25vh'} heightMobile={'25vh'} />
             </Parallax>
             <Parallax className='image' blur={0} bgImage={''} strength={1700} bgImageStyle={{ minHeight: "100vh" }} style={{ backgroundColor: darkGray }}>

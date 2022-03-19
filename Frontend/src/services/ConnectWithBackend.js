@@ -37,6 +37,13 @@ class ConnectWithBackend {
         }
         return connect.get('api/hidden/events/getForAdmin', config)
     }
+    getForChart(cookieName) {
+        const token = `bearer ${getCookie(cookieName)}`
+        const config = {
+            headers: { Authorization: token, 'Content-Type': 'application/json', },
+        }
+        return connect.get('api/hidden/events/getForChart', config)
+    }
     searchEvents(cookieName, textSearch) {
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
@@ -73,6 +80,7 @@ class ConnectWithBackend {
         return connect.post(`api/hidden/events/deletePhoto/${id}`, data, config)
     }
     addMember(cookieName, data) {
+        console.log("Addmember Connect")
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
@@ -80,6 +88,7 @@ class ConnectWithBackend {
         return connect.post(`api/hidden/members`, data, config)
     }
     editMember(cookieName, data, id) {
+        console.log("Editdmember Connect")
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
@@ -87,6 +96,7 @@ class ConnectWithBackend {
         return connect.put(`api/hidden/members/${id}`, data, config)
     }
     deleteMember(cookieName, id) {
+        console.log("delete memebr Connect")
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
@@ -112,28 +122,31 @@ class ConnectWithBackend {
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
         }
-        return connect.put(`api/hidden/users/${id}`, data, config)
+        return connect.patch(`api/hidden/users/${id}`, data, config)
     }
     editUsernameDataAdmin(cookieName, data, id) {
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
         }
-        return connect.put(`api/hidden/users/username/${id}`, data, config)
+        return connect.patch(`api/hidden/users/username/${id}`, data, config)
     }
     editEmailDataAdmin(cookieName, data, id) {
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
         }
-        return connect.put(`api/hidden/users/email/${id}`, data, config)
+        return connect.patch(`api/hidden/users/email/${id}`, data, config)
     }
     editPasswordDataAdmin(cookieName, data, id) {
         const token = `bearer ${getCookie(cookieName)}`
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
         }
-        return connect.put(`api/hidden/users/password/${id}`, data, config)
+        return connect.patch(`api/hidden/users/password/${id}`, data, config)
+    }
+    getCompanyData() {
+        return connect.get('api/company')
     }
     getCompanyDataAdmin(cookieName) {
         const token = `bearer ${getCookie(cookieName)}`
@@ -147,7 +160,7 @@ class ConnectWithBackend {
         const config = {
             headers: { Authorization: token, 'Content-Type': 'application/json', },
         }
-        return connect.put(`api/hidden/company/${id}`, data, config)
+        return connect.patch(`api/hidden/company/${id}`, data, config)
     }
     getMailsData(cookieName) {
         const token = `bearer ${getCookie(cookieName)}`

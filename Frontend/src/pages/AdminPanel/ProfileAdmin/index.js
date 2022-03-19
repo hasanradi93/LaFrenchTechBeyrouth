@@ -16,7 +16,7 @@ const ProfileAdminPage = () => {
                     :
                     <>
                         <SideBar menuIndex={4} />
-                        <ProfileAdmin titlePage={'Profile Page'} titlePageSize={'3rem'} />
+                        <ProfileAdmin titlePage={'Profile'} titlePageSize={'3rem'} />
                     </>
             }
         </>

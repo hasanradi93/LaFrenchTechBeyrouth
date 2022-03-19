@@ -8,7 +8,7 @@ import ErrorNotice from '../../ErrorNotice'
 const UsernameData = () => {
     const iconStyle = (Icon) => <Icon />
     const [edit, setEdit] = useState(false)
-    const { userInfo } = useContext(AuthContext)
+    const { userInfo, checkLoggedIn } = useContext(AuthContext)
     const [oldUsername, setOldUsername] = useState(null)
     const [newUsername, setNewUsername] = useState(null)
     const [password, setPassword] = useState(null)
@@ -16,21 +16,24 @@ const UsernameData = () => {
 
     const updateData = () => {
         if (oldUsername && newUsername && password) {
-            if (oldUsername === userInfo.username) {
-                setMessageMini('Please fill the valid old username')
+            if (oldUsername !== userInfo.username) {
+                setMessageMini('Please fill the valid old Username')
             }
             else {
                 const data = { "username": newUsername, "password": password }
                 backend
                     .editUsernameDataAdmin('LaFrenchTechToken', data, userInfo.id)
                     .then(response => {
-                        console.log("response.data.data", response.data.data)
                         setMessageMini("Username updated successfully")
+                        if (response.status === 201) {
+                            let intervalReload = setInterval(() => {
+                                backend.logout('LaFrenchTechToken')
+                                checkLoggedIn()
+                                clearInterval(intervalReload)
+                            }, 5000)
+                        }
                     })
-                    .catch(error => {
-                        console.log("error.response.data.error", error.response.data.error)
-                        setMessageMini(error.response.data.error)
-                    })
+                    .catch(error => setMessageMini(error.response.data.error))
             }
         }
         else {
@@ -46,17 +49,17 @@ const UsernameData = () => {
                     <>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter your old username' value={oldUsername} onChange={(e) => setOldUsername(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter your old username' value={oldUsername} onChange={(e) => setOldUsername(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter the new username' value={newUsername} onChange={(e) => setNewUsername(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter the new username' value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>
                             <SpanSideCard>
-                                <InputBox type='text' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.targetvalue)} />
+                                <InputBox type='text' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
                             </SpanSideCard>
                         </DivTwoSide>
                         <DivTwoSide>

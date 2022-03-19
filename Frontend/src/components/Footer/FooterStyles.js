@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Column, Row } from '../../services/globalStyles';
-import { darkGray, darkRed, lightGreen, white } from '../../services/colors';
+import { darkGray, darkRed, lightGray, lightGreen, white } from '../../services/colors';
 
 export const FooterContainer = styled.div`
 	background-color: ${darkGray};
@@ -158,5 +158,28 @@ export const FooterAddress = styled.div`
 		margin-left: 0px;
 		text-align: left;
 		margin-right: 1rem;
+	}
+`
+export const FooterMailPhone = styled.div`
+	color:  ${white};
+	margin: 0.4rem auto 0.4rem;
+	max-width: 20rem;
+	font-weight: 500;
+	font-size: 1rem;
+	line-height: 1.5;
+	text-align: center;
+
+	@media screen and (min-width: 1000px) {
+		margin-left: 0px;
+		text-align: left;
+		margin-right: 1rem;
+	}
+
+	>a{
+		color:  ${white};
+		text-decoration:none;
+	}
+	>a:hover{
+		color:  ${lightGray};
 	}
 `

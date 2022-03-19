@@ -5,9 +5,10 @@ import {
     lightGray,
     darkRed,
     darkGray,
-    lightRed
+    lightRed,
+    lightGreen
 } from '../../../services/colors'
-import { MainHeading1, Section } from '../../../services/globalStyles'
+import { MainHeading1, SecondHeading, Section } from '../../../services/globalStyles'
 
 export const HomePageSection = styled(Section)`
     width:80% !important;
@@ -18,6 +19,7 @@ export const HomePageSection = styled(Section)`
 export const SectionDataDiv = styled(motion.div)`
     width:100%;
     height:${({ height }) => (height ? height : '250px')};
+    margin-bottom:${({ mb }) => (mb ? mb : 'auto')} !important;
     z-index:${({ zIndex }) => (zIndex ? zIndex : '1')};
     margin-bottom:25px;
     margin-top:25px;
@@ -44,7 +46,8 @@ export const TitlePage = styled(MainHeading1)`
 `
 export const SetDataDiv = styled(motion.div)`
     width:100%;
-    height:60px;
+    height:${({ height }) => (height ? height : '60px')};
+    background:${({ background }) => (background ? background : white)};
     margin-top:10px;
     padding:5px 15px;
     margin-bottom:5px;
@@ -52,6 +55,22 @@ export const SetDataDiv = styled(motion.div)`
     font-weight:bold;
     letter-spacing:1px;
     color:${darkGray};
+`
+export const SpanSide = styled.span`
+    width:${({ width }) => (width ? width : '50%')};
+	float:left;
+	margin-left:auto;
+	margin-right:auto;
+    height:36px;
+	cursor:pointer;
+	text-align:center;
+	&:hover{
+        color:${({ colorHover }) => (colorHover ? colorHover : darkRed)};
+		background-color:${({ backColor }) => (backColor ? backColor : darkGray)};
+		>a{
+			color:${({ colorHover }) => (colorHover ? colorHover : darkRed)};
+		}
+    }
 `
 export const MailsTable = styled.table`
     width:100%;
@@ -124,4 +143,8 @@ export const Line = styled(motion.div)`
     border-bottom:1px solid ${lightGray};
     margin:auto;
     opacity:0.4;
+`
+export const SecondHeadingEdited = styled(SecondHeading)`
+color:${({ color }) => (color ? color : lightGray)};
+&${SecondHeading}
 `
