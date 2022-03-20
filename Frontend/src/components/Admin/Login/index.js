@@ -64,6 +64,7 @@ const Login = () => {
                     setPassword('')
                     setError(null)
                     setSuccess('Login successfully done!')
+                    console.log("response", response)
                     setCookie("LaFrenchTechToken", response.data.token, 60)
                     let intervalLogin = setInterval(() => {
                         setSuccess(null)

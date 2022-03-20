@@ -19,7 +19,7 @@ const getMailsData = async (request, response, next) => {
         .limit(10)
     console.log("mails", mails)
     if (!mails.length)
-        return next({ name: "Corrupted", message: `No members data` })
+        return next({ name: "Corrupted", message: `No mails sent data` })
     response.status(201).json({ data: mails })
 }
 module.exports = { mailsForEvent, getMailsData }

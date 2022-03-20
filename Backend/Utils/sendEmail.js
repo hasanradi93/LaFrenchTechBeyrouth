@@ -53,7 +53,7 @@ const sendAMailEvent = async (event) => {
     ]
     const daysNamesArr = [daysNames[dateOfDays[0].getUTCDay()], daysNames[dateOfDays[1].getUTCDay()], daysNames[dateOfDays[2].getUTCDay()]]
     const monthNamesArr = [monthsNames[dateOfDays[0].getUTCMonth()], monthsNames[dateOfDays[1].getUTCMonth()], monthsNames[dateOfDays[2].getUTCMonth()]]
-    const datesToSend = [`${timeToSend} ${hourToSend} ${(days[0])} ${monthNamesArr[0]} ${daysNamesArr[0]}`, `00 16 ${(days[1])} ${monthNamesArr[1]} ${daysNamesArr[1]}`, `00 16 ${(days[2])} ${monthNamesArr[2]} ${daysNamesArr[2]}`]
+    const datesToSend = [`${timeToSend} ${hourToSend} ${(days[0])} ${monthNamesArr[0]} ${daysNamesArr[0]}`, `${timeToSend} ${hourToSend}  ${(days[1])} ${monthNamesArr[1]} ${daysNamesArr[1]}`, `${timeToSend} ${hourToSend} ${(days[2])} ${monthNamesArr[2]} ${daysNamesArr[2]}`]
     logger.info("days", days)
     logger.info("dateOfDays", dateOfDays)
     logger.info("datesToSend", datesToSend)
@@ -78,12 +78,24 @@ const sendAMailEvent = async (event) => {
             logger.info("emails", emails)
             let subscribersMails = emails
             const emailCompany = await getEmailCompany.companyMail()
+            const messageContent = `
+                <div style='text-align:center;'><img src='cid:logo' alt='La French Tech Beyrouth logo' style='width:128px;height:128px;'/></div>
+                <div style='text-align:center;background-color:#425f6c;color:white;height:110px;padding-top:10px;'><h1 style='font-size:44px;'>La French Tech Beyrouth</h1></div> 
+                <h3 style='color:#ad1a29;'>Subscription done successfully</h3>
+                <h4><u><b style='color:#ad1a29;'>Event:</b></u> ${event.title}</h4>
+                <p><b style='color:#ad1a29;'>Content:</b> ${event.description}</p>
+                <p><b style='color:#ad1a29;'>Dates:</b> Beirut ${beirutStartDate} | UAE ${dubaiDateDate}</p>`
             let mailOptions = {
                 from: emailCompany,
                 to: `${subscribersMails}`,
                 subject: `Reminder: for the event ${event.title}`,
-                text: `${event.description}`,
-                html: `${event.description}`
+                text: `${messageContent}`,
+                html: `${messageContent}`,
+                attachments: [{
+                    filename: 'logo-Big.png',
+                    path: __dirname + '/logo-Big.png',
+                    cid: 'logo'
+                }]
             }
             transporterByMyMail.sendMail(mailOptions, function (error, info) {
                 if (error)
@@ -119,17 +131,24 @@ const sendSubscriptionDone = async (event, mailSubscriber) => {
     const emailCompany = await getEmailCompany.companyMail()
     const beirutStartDate = moment.tz(event.startDate, 'Asia/Beirut').toString()
     const dubaiDateDate = moment.tz(event.startDate, 'Asia/Dubai').toString()
-    const messageContent = `<h2 align='center'>La French Tech Beyrouth</h2>
-    <h3>Subscription done successfully</h3>
-    <h4><u><b>Event:</b></u> ${event.title}</h4>
-    <p><b>Content:</b> ${event.description}</p>
-    <p><b>Dates:</b> Beirut ${beirutStartDate} | UAE ${dubaiDateDate}</p>`
+    const messageContent = `
+            <div style='text-align:center;'><img src='cid:logo' alt='La French Tech Beyrouth logo' style='width:128px;height:128px;'/></div>
+            <div style='text-align:center;background-color:#425f6c;color:white;height:110px;padding-top:10px;'><h1 style='font-size:44px;'>La French Tech Beyrouth</h1></div> 
+            <h3 style='color:#ad1a29;'>Subscription done successfully</h3>
+            <h4><u><b style='color:#ad1a29;'>Event:</b></u> ${event.title}</h4>
+            <p><b style='color:#ad1a29;'>Content:</b> ${event.description}</p>
+            <p><b style='color:#ad1a29;'>Dates:</b> Beirut ${beirutStartDate} | UAE ${dubaiDateDate}</p>`
     const mailOptions = {
         from: emailCompany,
         to: mailSubscriber,
-        subject: `Welcome to LA French Tech Beyrouth`,
+        subject: `Welcome to La French Tech Beyrouth`,
         text: messageContent,
-        html: messageContent
+        html: messageContent,
+        attachments: [{
+            filename: 'logo-Big.png',
+            path: __dirname + '/logo-Big.png',
+            cid: 'logo'
+        }]
     }
     transporterByMyMail.sendMail(mailOptions, function (error, info) {
         if (error)

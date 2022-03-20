@@ -1,7 +1,7 @@
 {
   "Initial":
     {
-      "appTitle": "La French Tech Beyrout",
+      "appTitle": "La French Tech Beyrouth",
       "language": "Language",
       "welcome_message": "Welcome",
       "days_since_release": "it's been {{number_of_days}} days since this video was released"
@@ -279,7 +279,7 @@
     },
   "StartUps":{
     "StartUps_mainHeading":"What French Tech does for start-ups",
-    "StartUps_secondHeading":"Are you an entrepreneur to be? A growing start-up? A rising scale-up? An international talent or an investor?\nFind here the main public mechanisms, from programs to public policies, offered by the actors of the State in order to raise and promote the French Tech ecosystem.",
+    "StartUps_secondHeading":"Are you an entrepreneur to be? A growing start-up? A rising scale-up? An international talent or an investor?\nFind here the main public mechanisms, from programs to public policies, offered by the actors of the State in order to raise and promote the French Tech ecosystem.\nThe French Tech Visa is a simplified, fast-track scheme for non-EU startup employees, founders and investors to obtain a residence permit for France. A 400M EUR match fund, allowing France to co-invest and encourage angel investing in hundreds of young deeptech startups.",
     "StartUps_note":"Feels like we forgot something?",
     "StartUps_contactLink":"Let us know!",
     "linkLearnMore":"Learn more",
@@ -355,5 +355,9 @@
         "title": "Legal",
         "links": ["GDPR", "Privacy Policy", "Terms of Service", "Disclaimer"]
     }
-  ]      
+  ],
+  "NotFound":{
+    "main_Heading":"Page Not Found",
+    "second_Heading":"We're sorry, the page you were looking for isn't found here. The link you followed may either be broken or no longer exists. Please try again, or take a look at our."
+  }      
 }

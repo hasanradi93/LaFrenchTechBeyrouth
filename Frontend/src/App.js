@@ -59,12 +59,18 @@ function App() {
       }>
         <AuthContextProvider>
           <Routes>
-            <Route path="/" exact element={<HomePage />} />
+            <Route path='/' exact element={<HomePage />} />
+            <Route path={'/' + currentLanguageCode} exact element={<HomePage />} />
             <Route path="/about" exact element={<AboutPage />} />
+            <Route path={'/' + currentLanguageCode + '/about'} exact element={<AboutPage />} />
             <Route path="/events" exact element={<EventsPage />} />
+            <Route path={'/' + currentLanguageCode + '/events'} exact element={<EventsPage />} />
             <Route path="/contact" exact element={<ContactPage />} />
+            <Route path={'/' + currentLanguageCode + '/contact'} exact element={<ContactPage />} />
             <Route path="/startups" exact element={<StartUpsPage />} />
+            <Route path={'/' + currentLanguageCode + '/startups'} exact element={<StartUpsPage />} />
             <Route path="/members" exact element={<MembersPage />} />
+            <Route path={'/' + currentLanguageCode + '/members'} exact element={<MembersPage />} />
             <Route path="/admin/login" exact element={<LoginPage />} />
             <Route path="adminPanel" element={<ProtectedRoutes />} >
               <Route index element={<AdminPage />} />

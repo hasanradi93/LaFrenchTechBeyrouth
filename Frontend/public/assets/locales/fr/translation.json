@@ -1,7 +1,7 @@
 {
   "Initial":
     {
-      "appTitle": "La French Tech Beyrout",
+      "appTitle": "La French Tech Beyrouth",
       "language": "Langue",
       "welcome_message": "Bienvenue",
       "days_since_release": "ça fait {{number_of_days}} jours depuis la sortie de cette vidéo"
@@ -279,7 +279,7 @@
   },
   "StartUps":{
     "StartUps_mainHeading":"Ce que la French Tech fait pour les start-up",
-    "StartUps_secondHeading":"Êtes-vous un entrepreneur à être? Une start-up en pleine croissance ? Un scale-up en hausse ? Un talent international ou un investisseur ?\nRetrouvez ici les principaux dispositifs publics, des programmes aux politiques publiques, proposés par les acteurs de l'Etat pour faire émerger et promouvoir l'écosystème French Tech.",
+    "StartUps_secondHeading":"Êtes-vous un entrepreneur à être? Une start-up en pleine croissance ? Un scale-up en hausse ? Un talent international ou un investisseur ?\nRetrouvez ici les principaux dispositifs publics, des programmes aux politiques publiques, proposés par les acteurs de l'Etat pour faire émerger et promouvoir l'écosystème French Tech.\nLe French Tech Visa est un régime simplifié et accéléré permettant aux salariés, fondateurs et investisseurs de startups non européens d'obtenir un titre de séjour pour la France. Un fonds de contrepartie de 400 millions d'euros, permettant à la France de co-investir et d'encourager l'investissement providentiel dans des centaines de jeunes startups deeptech.",
     "StartUps_note":"Vous avez l'impression d'avoir oublié quelque chose ?",
     "StartUps_contactLink":"Faites le nous savoir!",
     "linkLearnMore":"Voir plus",
@@ -355,5 +355,9 @@
         "title": "Légal",
         "links": ["RGPD", "Politique de confidentialité", "Conditions d'utilisation", "Avis de non-responsabilité"]
     }
-  ]     
+  ],
+  "NotFound":{
+    "main_Heading":"Page non trouvée",
+    "second_Heading":"Nous sommes désolés, la page que vous recherchez ne se trouve pas ici. Le lien que vous avez suivi peut être cassé ou n'existe plus. Veuillez réessayer ou consulter notre."
+  }      
 }

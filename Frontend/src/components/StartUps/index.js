@@ -55,7 +55,7 @@ const StartUps = () => {
                         animate={animation}
                         fontSize={'2.8rem'}
                         lineHeight={'15px'}
-                        color={darkRed}
+                        color={lightRed}
                     >
                         {t('StartUps.StartUps_mainHeading')}
                     </MainHeading1Edited>

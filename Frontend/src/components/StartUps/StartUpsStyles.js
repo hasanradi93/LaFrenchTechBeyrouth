@@ -21,6 +21,7 @@ export const SecondHeadingEdited = styled(SecondHeading)`
     width:70%;
     margin-bottom: 15px;
 	text-justify: inter-word;
+    letter-spacing:0px;
     @media screen and (max-width:960px){
         width:100%;
         font-size:1.4rem;
